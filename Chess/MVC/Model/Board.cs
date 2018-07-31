@@ -20,15 +20,15 @@ namespace Chess.MVC.Model
                 {
                     if (j == 17)
                     {
-                        Console.WriteLine();
+                        gameBoard[i][j] = "\r\n";
                     }
                     else if (j%2 == 0)
                     {
-                        Console.Write("|");
+                        gameBoard[i][j] = "|";
                     }
                     else
                     {
-                        Console.Write("_");
+                        gameBoard[i][j] = "_";
                     }
                    
                 }
