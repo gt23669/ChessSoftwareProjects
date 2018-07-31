@@ -8,16 +8,19 @@ namespace Chess.MVC.Model
 {
     class Board
     {
-        private string[][] gameBoard = new string[8][8];
+        
+        public string[][] gameBoard = new string[8][];
 
         public void GenerateBoard()
         {
             for (int i = 0; i < gameBoard.Length; i++)
             {
-                for (int j = 0; j <gameBoard[i].Length; j++)
+                gameBoard[i] = new string[8];
+                for (int j = 0; j < gameBoard[i].Length; j++)
                 {
-                    Console.WriteLine(gameBoard[i][j] = "-");
+                    Console.Write(gameBoard[i][j] = "j");
                 }
+
             }
         }
     }
