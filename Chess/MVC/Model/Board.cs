@@ -34,6 +34,13 @@ namespace Chess.MVC.Model
                 }
 
             }
+            //for (int i = 0; i < gameBoard.Length; i++)
+            //{
+            //    for (int j = 0; j < gameBoard.Length; j++)
+            //    {
+            //        Console.WriteLine(gameBoard[i][j]);
+            //    }
+            //}
         }
     }
 }

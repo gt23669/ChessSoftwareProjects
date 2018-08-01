@@ -12,10 +12,10 @@ namespace Chess
         static void Main(string[] args)
         {
             //Chess Application
-            //Board a = new Board();
-            //a.GenerateBoard();
-            //    King ab= new King();
-            //    checkPiece(ab);
+            Board a = new Board();
+            a.GenerateBoard();
+            //King ab = new King();
+            //checkPiece(ab);
         }
         //public static void checkPiece(Piece a)
         //{
