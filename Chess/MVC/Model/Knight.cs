@@ -9,6 +9,8 @@ namespace Chess.MVC.Model
     class Knight : Piece
     {
         string name = "Knight";
+        string ID = "KN";
+
 
         public override bool Check()
         {

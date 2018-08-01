@@ -9,6 +9,7 @@ namespace Chess.MVC.Model
     class Rook : Piece
     {
         string name = "Rook";
+        string ID = "R";
 
         public override bool Check()
         {

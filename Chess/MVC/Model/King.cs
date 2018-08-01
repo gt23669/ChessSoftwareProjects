@@ -10,6 +10,7 @@ namespace Chess.MVC.Model
     {
 
         string name = "King";
+        string ID = "K";
 
         public override bool Check()
         {

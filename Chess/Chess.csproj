@@ -60,5 +60,8 @@
     <Folder Include="MVC\Controller\" />
     <Folder Include="MVC\View\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TextFile1.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
