@@ -21,13 +21,23 @@ namespace Chess
                 if (File.Exists(args[0]))
                 {
                     string content = File.ReadAllText(args[0]);
+                    content = content.ToUpper();
                     Console.WriteLine("Your Game Looks like: ");
                     string[] SplitArray = Regex.Split(content, "[\r\n]+");
                     for (int i = 0; i < SplitArray.Length; i++)
                     {
+                        if (SplitArray[i] == "")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                           
                         char[] CharSplit = SplitArray[i].ToCharArray();
 
                         placement(CharSplit);
+
+                        }
 
                     }
                 }
@@ -35,6 +45,9 @@ namespace Chess
             }
             else
             {
+                Console.WriteLine("What is the new file name?");
+                string input = Console.ReadLine();
+                input += ".txt";
                 Console.WriteLine("How many things would you like to add to this new file");
                 string num = Console.ReadLine();
                 int ParseNum = 0;
@@ -44,11 +57,11 @@ namespace Chess
                 {
                     for (int i = 0; i < ParseNum; i++)
                     {
-                        Console.WriteLine($"Item{i}");
+                        Console.WriteLine($"Piece {i+1}");
                         NewContent.Add(Console.ReadLine());
 
                     }
-                     File.WriteAllLines(args[0], NewContent.ToArray());
+                     File.WriteAllLines(input, NewContent.ToArray());
                 }
                 NewContent.Clear();
             }
@@ -65,6 +78,7 @@ namespace Chess
 
         public static void placement(char[] lol)
         {
+           
             string StringA = "";
             string Stringb = "";
             switch (lol[1])
@@ -90,13 +104,13 @@ namespace Chess
             }
 
 
-            if (lol[2] == 'l')
+            if (lol[2] == 'L')
             {
-                Stringb = "light";
+                Stringb = "Light";
             }
             else
             {
-                Stringb = "dark";
+                Stringb = "Dark";
             }
 
             NewContent.Add($" The #{lol[0]} {Stringb} {StringA} moved to {lol[4]},{lol[3]} ");
