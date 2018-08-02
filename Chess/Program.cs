@@ -14,11 +14,7 @@ namespace Chess
         static List<string> NewContent = new List<string>();
         static void Main(string[] args)
         {
-            for (int i = 0; i < args.Length; i++)
-            {
-                Console.WriteLine(args[i]);
-            }
-            if (args.Length >0)
+            if (args.Length > 0)
             {
                 //Console.WriteLine("What is your file name");
                 //string FilePath = Console.ReadLine();
@@ -26,88 +22,84 @@ namespace Chess
                 {
                     string content = File.ReadAllText(args[0]);
                     Console.WriteLine("Your Game Looks like: ");
-                    string[] b = Regex.Split(content, "[\r\n]+");
-                    for (int i = 0; i < b.Length; i++)
+                    string[] SplitArray = Regex.Split(content, "[\r\n]+");
+                    for (int i = 0; i < SplitArray.Length; i++)
                     {
-                        char[] a = b[i].ToCharArray();
+                        char[] CharSplit = SplitArray[i].ToCharArray();
 
-                        placement(a);
+                        placement(CharSplit);
 
                     }
                 }
-                else
-                {
-                    Console.WriteLine("How many things would you like to add to this new file");
-                    string num = Console.ReadLine();
-                    int a = 0;
-                    bool hope = int.TryParse(num, out a);
-
-                    if (hope)
-                    {
-                        for (int i = 0; i < a; i++)
-                        {
-                            Console.WriteLine($"Item{i}");
-                            NewContent.Add(Console.ReadLine());
-
-                        }
-                        // File.WriteAllLines(args[0], NewContent.ToArray());
-                    }
-                    NewContent.Clear();
-                }
-
-                if (NewContent.Count > 0)
-                {
-                    foreach (var item in NewContent)
-                    {
-                        Console.WriteLine(item);
-                    }
-                    // File.WriteAllLines(FilePath, NewContent.ToArray());
-                }
+               
             }
             else
             {
-                Console.WriteLine("empty args");
-                //
+                Console.WriteLine("How many things would you like to add to this new file");
+                string num = Console.ReadLine();
+                int ParseNum = 0;
+                bool hope = int.TryParse(num, out ParseNum);
+
+                if (hope)
+                {
+                    for (int i = 0; i < ParseNum; i++)
+                    {
+                        Console.WriteLine($"Item{i}");
+                        NewContent.Add(Console.ReadLine());
+
+                    }
+                     File.WriteAllLines(args[0], NewContent.ToArray());
+                }
+                NewContent.Clear();
+            }
+
+            if (NewContent.Count > 0)
+            {
+                foreach (var item in NewContent)
+                {
+                    Console.WriteLine(item);
+                }
+                // File.WriteAllLines(FilePath, NewContent.ToArray());
             }
         }
 
         public static void placement(char[] lol)
         {
-            string a = "";
-            string b = "";
+            string StringA = "";
+            string Stringb = "";
             switch (lol[1])
             {
                 case 'K':
-                    a = "king";
+                    StringA = "king";
                     break;
                 case 'Q':
-                    a = "Queen";
+                    StringA = "Queen";
                     break;
                 case 'B':
-                    a = "Bishop";
+                    StringA = "Bishop";
                     break;
                 case 'N':
-                    a = "Knight";
+                    StringA = "Knight";
                     break;
                 case 'R':
-                    a = "Rook";
+                    StringA = "Rook";
                     break;
                 case 'P':
-                    a = "Pawn";
+                    StringA = "Pawn";
                     break;
             }
 
 
             if (lol[2] == 'l')
             {
-                b = "light";
+                Stringb = "light";
             }
             else
             {
-                b = "dark";
+                Stringb = "dark";
             }
 
-            NewContent.Add($" The #{lol[0]} {b} {a} moved to {lol[4]},{lol[3]} ");
+            NewContent.Add($" The #{lol[0]} {Stringb} {StringA} moved to {lol[4]},{lol[3]} ");
         }
     }
 }
