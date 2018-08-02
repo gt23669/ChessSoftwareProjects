@@ -14,7 +14,11 @@ namespace Chess
         static List<string> NewContent = new List<string>();
         static void Main(string[] args)
         {
-            if (args != null)
+            for (int i = 0; i < args.Length; i++)
+            {
+                Console.WriteLine(args[i]);
+            }
+            if (args.Length >0)
             {
                 //Console.WriteLine("What is your file name");
                 //string FilePath = Console.ReadLine();
@@ -62,7 +66,8 @@ namespace Chess
             }
             else
             {
-
+                Console.WriteLine("empty args");
+                //
             }
         }
 
