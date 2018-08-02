@@ -116,7 +116,7 @@ namespace Chess.MVC.Controller
         }
         public static void Move()
         {
-
+            ///hello
         }
 
         public static void DoubleMove()
