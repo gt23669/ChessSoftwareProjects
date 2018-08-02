@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVC\Controller\GameSetup.cs" />
     <Compile Include="MVC\Model\Bishop.cs" />
     <Compile Include="MVC\Model\Board.cs" />
     <Compile Include="MVC\Model\King.cs" />
@@ -57,7 +58,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVC\Controller\" />
     <Folder Include="MVC\View\" />
   </ItemGroup>
   <ItemGroup>
