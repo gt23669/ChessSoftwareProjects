@@ -131,7 +131,7 @@ namespace Chess.MVC.Controller
                     {
                         StringSplit = SplitArray[i].Split(' ');
                         for (int j = 0; j < StringSplit.Length; j++)
-                        {
+                        {   
                             Console.WriteLine($"the piece at {StringSplit[0]},{StringSplit[1]} moved to {StringSplit[2]},{StringSplit[3]}");
                         }
                     }
