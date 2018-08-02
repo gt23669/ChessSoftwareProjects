@@ -16,6 +16,7 @@ namespace Chess
         static void Main(string[] args)
         {
             GameSetup.Setup(args);
+            GameSetup.Move(args);
         }
     }
 }

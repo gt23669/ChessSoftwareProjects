@@ -114,9 +114,35 @@ namespace Chess.MVC.Controller
 
             NewContent.Add($" The {Stringb} {StringA} moved to {lol[3]},{lol[2]} ");
         }
-        public static void Move()
+        public static void Move(string [] args)
         {
-            ///hello
+            if (args.Length > 0)
+            {
+                //Console.WriteLine("What is your file name");
+                //string FilePath = Console.ReadLine();
+                if (File.Exists(args[1]))
+                {
+                    string content = File.ReadAllText(args[1]);
+                    content = content.ToUpper();
+                    Console.WriteLine("Your Moves Looks like: ");
+                    string[] SplitArray = Regex.Split(content, "[\r\n]+");
+                    string[] StringSplit;
+                    for (int i = 0; i < SplitArray.Length; i++)
+                    {
+                        StringSplit = SplitArray[i].Split(' ');
+                        for (int j = 0; j < StringSplit.Length; j++)
+                        {
+                            Console.WriteLine($"the piece at {StringSplit[0]},{StringSplit[1]} moved to {StringSplit[2]},{StringSplit[3]}");
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+            }
+
+           
         }
 
         public static void DoubleMove()
