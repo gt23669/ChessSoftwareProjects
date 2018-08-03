@@ -116,10 +116,10 @@ namespace Chess.MVC.Controller
         }
         public static void Move(string [] args)
         {
-            if (args.Length > 0)
+            if (args.Length > 1)
             {
-                //Console.WriteLine("What is your file name");
-                //string FilePath = Console.ReadLine();
+                //
+                //put in validation at some point
                 if (File.Exists(args[1]))
                 {
                     string content = File.ReadAllText(args[1]);
