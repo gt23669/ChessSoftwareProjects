@@ -145,11 +145,39 @@ namespace Chess.MVC.Controller
            
         }
 
-        public static void DoubleMove()
+        public static void DoubleMove(string[] args)
         {
+            List<string> doubleMoveContent = new List<string>();
 
+            string content = File.ReadAllText(args[0]);
+            content = content.ToUpper();
+            Console.WriteLine("Your Game Looks like: ");
+            string[] SplitArray = Regex.Split(content, "[\r\n]+");
+            List<string> tempList = new List<string>();
+            for (int i = 0; i < SplitArray.Length; i++)
+            {
+                SplitArray[i] = SplitArray[i].Replace(" ", "");
+                //tempList.Add(SplitArray[i].Substring(0,4));
+                //tempList.Add(SplitArray[i].Substring(4, 4));
+                //Console.WriteLine(tempList[i]);
+                Console.WriteLine($"Piece at {SplitArray[i].Substring(0, 2)} is moving to {SplitArray[i].Substring(2, 2)} and {SplitArray[i].Substring(4, 2)} is moving to {SplitArray[i].Substring(6, 2)}");
+            }
+
+
+
+            //List<string> tempList = SplitArray.ToList();
+
+            //for (int i = 0; i < tempList.Count; i++)
+            //{
+            //    if (tempList[i].Contains("@"))
+            //    {
+            //        tempList.RemoveAt(i);
+
+            //    }
+            //}
         }
     }
+}
 
 
 }
