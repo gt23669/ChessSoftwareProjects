@@ -427,28 +427,28 @@ namespace Chess.MVC.Controller
             switch (tempX)
             {
                 case 'A':
-                    x = 0;
-                    break;
-                case 'B':
-                    x = 1;
-                    break;
-                case 'C':
                     x = 2;
                     break;
-                case 'D':
-                    x = 3;
-                    break;
-                case 'E':
-                    x = 4;
-                    break;
-                case 'F':
-                    x = 5;
-                    break;
-                case 'G':
+                case 'B':
                     x = 6;
                     break;
+                case 'C':
+                    x = 10;
+                    break;
+                case 'D':
+                    x = 14;
+                    break;
+                case 'E':
+                    x = 18;
+                    break;
+                case 'F':
+                    x = 22;
+                    break;
+                case 'G':
+                    x = 26;
+                    break;
                 case 'H':
-                    x = 7;
+                    x = 30;
                     break;
             }
             return x;

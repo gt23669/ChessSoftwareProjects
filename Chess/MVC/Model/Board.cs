@@ -13,58 +13,52 @@ namespace Chess.MVC.Model
 
         public string[][] GenerateBoard()
         {
+            for (int i = 0; i < gameBoard.Length; i++)
+            {
+                gameBoard[i] = new string[34];
+                for (int j = 0; j < gameBoard[i].Length; j++)
+                {
+                    if (j == 33)
+                    {
+                        Console.Write(gameBoard[i][j] = "\r\n");
+                    }
+                    else if (j % 4 == 0)
+                    {
+                        Console.Write(gameBoard[i][j] = "|");
+                    }
+                    else
+                    {
+                        Console.Write(gameBoard[i][j] = "_");
+                    }
+
+                }
+
+            }
+
             //for (int i = 0; i < gameBoard.Length; i++)
             //{
-            //    gameBoard[i] = new string[18];
+            //    gameBoard[i] = new string[8];
+
+            //}
+            //for (int i = 0; i < gameBoard.Length; i++)
+            //{
+
             //    for (int j = 0; j < gameBoard[i].Length; j++)
             //    {
-            //        if (j == 17)
-            //        {
-            //            Console.Write(gameBoard[i][j] = "\r\n");
-            //        }
-            //        else if (j % 2 == 0)
-            //        {
-            //            Console.Write(gameBoard[i][j] = "|");
-            //        }
-            //        else
-            //        {
-            //            Console.Write(gameBoard[i][j] = "_");
-            //        }
-
+            //        gameBoard[i][j] = "-";
             //    }
-
             //}
 
-            for (int i = 0; i < gameBoard.Length; i++)
-            {
-                gameBoard[i] = new string[8];
-
-            }
-            for (int i = 0; i < gameBoard.Length; i++)
-            {
-
-                for (int j = 0; j < gameBoard[i].Length; j++)
-                {
-                    gameBoard[i][j] = "-";
-                }
-            }
-
-            for (int i = 0; i < gameBoard.Length; i++)
-            {
-                for (int j = 0; j < gameBoard[i].Length; j++)
-                {
-                    //Console.Write(gameBoard[i][j]);
-                    Console.Write($"{gameBoard[i][j]}");
-                }
-                Console.WriteLine();
-            }
             //for (int i = 0; i < gameBoard.Length; i++)
             //{
-            //    for (int j = 0; j < gameBoard.Length; j++)
+            //    for (int j = 0; j < gameBoard[i].Length; j++)
             //    {
-            //        Console.WriteLine(gameBoard[i][j]);
+            //        //Console.Write(gameBoard[i][j]);
+            //        Console.Write($"{gameBoard[i][j]}");
             //    }
+            //    Console.WriteLine();
             //}
+           
             return gameBoard;
         }
 
@@ -76,28 +70,9 @@ namespace Chess.MVC.Model
                 int row;
                 Console.WriteLine(col = pieces[i].col);
                 Console.WriteLine(row = pieces[i].row);
-                //if (col % 2 == 0)
-                //{
-                //    col += 1;
-                //    gameBoard[row][col] = pieces[i].ID;
-                //    printNewBoard(gameBoard);
-                //    count++;
-                //}
-                //else if (col % 2 == 1)
-                //{
-                //    col += 2;
-                //    gameBoard[row][col] = pieces[i].ID;
-                //    printNewBoard(gameBoard);
-                //    count++;
-                //}
+               
                 gameBoard[row][col] = pieces[i].ID;
-                printNewBoard(gameBoard);
-
-
-
-
-
-
+               printNewBoard(gameBoard);
             }
             return gameBoard;
         }
@@ -113,7 +88,7 @@ namespace Chess.MVC.Model
                     Console.Write($"{gameBoard[i][j]}");
                 }
                 Console.WriteLine();
-                //Console.WriteLine("-------------------------");
+              
             }
 
 
