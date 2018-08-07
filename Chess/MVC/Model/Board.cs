@@ -15,14 +15,14 @@ namespace Chess.MVC.Model
         {
             for (int i = 0; i < gameBoard.Length; i++)
             {
-                gameBoard[i] = new string[18];
+                gameBoard[i] = new string[34];
                 for (int j = 0; j < gameBoard[i].Length; j++)
                 {
-                    if (j == 17)
+                    if (j == 33)
                     {
                         Console.Write(gameBoard[i][j] = "\r\n");
                     }
-                    else if (j%2 == 0)
+                    else if (j%4 == 0)
                     {
                         Console.Write(gameBoard[i][j] = "|");
                     }
