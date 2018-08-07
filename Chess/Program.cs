@@ -17,17 +17,8 @@ namespace Chess
 
         static void Main(string[] args)
         {
-            List<Piece> pieces = new List<Piece>();
-            List<string> tempList = new List<string>();
-            Board board = new Board();
-            gameBoard = board.GenerateBoard();
-            pieces = GameSetup.Menu(args);
-            gameBoard = board.printBoard(pieces);
             GameSetup.Menu(args);
-            //board.printNewBoard(gameBoard);
 
-            //GameSetup.Setup(args);
-            //GameSetup.Move(args);
         }
     }
 }
