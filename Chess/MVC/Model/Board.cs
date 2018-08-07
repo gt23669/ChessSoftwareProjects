@@ -42,29 +42,10 @@ namespace Chess.MVC.Model
             }
             for (int i = 0; i < gameBoard.Length; i++)
             {
-                gameBoard[i] = new string[34];
-                for (int j = 0; j < gameBoard[i].Length; j++)
-                {
 
                 for (int j = 0; j < gameBoard[i].Length; j++)
                 {
                     gameBoard[i][j] = "-";
-                gameBoard[i] = new string[34];
-                for (int j = 0; j < gameBoard[i].Length; j++)
-                {
-                    if (j == 33)
-                    {
-                        Console.Write(gameBoard[i][j] = "\r\n");
-                    }
-                    else if (j%4 == 0)
-                    {
-                        Console.Write(gameBoard[i][j] = "|");
-                    }
-                    else
-                    {
-                        Console.Write(gameBoard[i][j] = "_");
-                    }
-                   
                 }
             }
 
@@ -73,7 +54,7 @@ namespace Chess.MVC.Model
                 for (int j = 0; j < gameBoard[i].Length; j++)
                 {
                     //Console.Write(gameBoard[i][j]);
-                    Console.Write($"|{gameBoard[i][j]}|");
+                    Console.Write($"{gameBoard[i][j]}");
                 }
                 Console.WriteLine();
             }
@@ -129,7 +110,7 @@ namespace Chess.MVC.Model
             {
                 for (int j = 0; j < gameBoard[i].Length; j++)
                 {
-                    Console.Write($"|{gameBoard[i][j]}|");
+                    Console.Write($"{gameBoard[i][j]}");
                 }
                 Console.WriteLine();
                 //Console.WriteLine("-------------------------");
