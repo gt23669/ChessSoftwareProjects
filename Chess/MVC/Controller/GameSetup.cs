@@ -16,6 +16,7 @@ namespace Chess.MVC.Controller
         public static List<Piece> Menu(string[] args)
         {
             List<Piece> pieces = new List<Piece>();
+            List<string> newPositions = new List<string>();
             bool exit = false;
             do
             {
@@ -49,15 +50,17 @@ namespace Chess.MVC.Controller
                             string file = args[fileChoice - 1];
                             string[] tempArgs = new string[] { file };
                             Console.WriteLine(file);
-                            Move(tempArgs);
+                            newPositions = Move(tempArgs);
+                            movePieces(newPositions);
 
                         }
                         else
                         {
-                            Move(args);
+                            newPositions = Move(args);
+                            movePieces(newPositions);
 
                         }
-                        return pieces;
+                        return null;
                     case 3:
                         if (args.Length > 1)
                         {
@@ -82,6 +85,9 @@ namespace Chess.MVC.Controller
             return pieces;
 
         }
+
+        
+
         public static List<Piece> Setup(string[] args)
         {
             List<Piece> pieces = new List<Piece>();
@@ -285,9 +291,9 @@ namespace Chess.MVC.Controller
 
             NewContent.Add($" The {Stringb} {StringA} is placed on {lol[3]},{lol[2]} ");
         }
-        public static void Move(string[] args)
+        public static List<string> Move(string[] args)
         {
-
+            string[] SplitArray = null;
             //
             //put in validation at some point
             bool exit = false;
@@ -301,7 +307,7 @@ namespace Chess.MVC.Controller
                         string content = File.ReadAllText(args[0]);
                         content = content.ToUpper();
                         Console.WriteLine("Your Moves Looks like: ");
-                        string[] SplitArray = Regex.Split(content, "[\r\n]+");
+                        SplitArray = Regex.Split(content, "[\r\n]+");
                         string[] StringSplit;
                         for (int i = 0; i < SplitArray.Length; i++)
                         {
@@ -311,11 +317,15 @@ namespace Chess.MVC.Controller
                             }
                             else
                             {
-                                StringSplit = SplitArray[i].Split(' ');
-                                for (int j = 0; j < StringSplit.Length; j++)
+                                if (SplitArray[i].Contains(" "))
                                 {
-                                    Console.WriteLine($"The piece at {StringSplit[0]} moved to {StringSplit[1]}");
+                                    SplitArray[i] = SplitArray[i].Replace(" ", "");
                                 }
+                                //StringSplit = SplitArray[i].Split(' ');
+                                //for (int j = 0; j < StringSplit.Length; j++)
+                                //{
+                                //    Console.WriteLine($"The piece at {StringSplit[0]} moved to {StringSplit[1]}");
+                                //}
 
                             }
 
@@ -346,8 +356,8 @@ namespace Chess.MVC.Controller
 
 
 
-
-
+            List<string> tempList = SplitArray.ToList();
+            return tempList;
         }
 
         public static void DoubleMove(string[] args)
@@ -442,6 +452,11 @@ namespace Chess.MVC.Controller
                     break;
             }
             return x;
+        }
+        private static void movePieces(List<string> newPositions)
+        {
+
+            
         }
     }
 }
