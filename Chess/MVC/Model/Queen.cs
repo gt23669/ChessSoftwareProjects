@@ -10,6 +10,16 @@ namespace Chess.MVC.Model
     {
         string name = "Queen";
         string ID = "Q";
+        char color;
+        int xLoc;
+        int yLoc;
+
+        public Queen(char color, int xLoc, int yLoc)
+        {
+            this.color = color;
+            this.xLoc = xLoc;
+            this.yLoc = yLoc;
+        }
 
         public override bool Check()
         {

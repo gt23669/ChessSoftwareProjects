@@ -12,12 +12,17 @@ namespace Chess
 {
     class Program
     {
-        
+        static string[][] gameBoard = new string[8][];
+
         static void Main(string[] args)
         {
-            GameSetup.menu(args);
+            List<Piece> pieces = new List<Piece>();
+            pieces = GameSetup.Menu(args);
             //GameSetup.Setup(args);
             //GameSetup.Move(args);
+            Board board = new Board();
+            gameBoard = board.GenerateBoard();
+            gameBoard = board.printBoard(pieces, gameBoard);
         }
     }
 }

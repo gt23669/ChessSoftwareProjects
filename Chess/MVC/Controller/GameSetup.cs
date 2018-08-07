@@ -6,14 +6,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CSC160_ConsoleMenu;
+using Chess.MVC.Model;
 
 namespace Chess.MVC.Controller
 {
     class GameSetup
     {
         static List<string> NewContent = new List<string>();
-        public static void menu(string[] args)
+        public static List<Piece> Menu(string[] args)
         {
+            List<Piece> pieces = new List<Piece>();
             bool exit = false;
             do
             {
@@ -31,14 +33,14 @@ namespace Chess.MVC.Controller
                             string file = args[fileChoice - 1];
                             string[] tempArgs = new string[] { file };
                             Console.WriteLine(file);
-                            Setup(tempArgs);
+                            pieces = Setup(tempArgs);
                         }
                         else
                         {
-                            Setup(args);
+                            pieces = Setup(args);
 
                         }
-                        break;
+                        return pieces;
                     case 2:
                         if (args.Length > 1)
                         {
@@ -55,7 +57,7 @@ namespace Chess.MVC.Controller
                             Move(args);
 
                         }
-                        break;
+                        return pieces;
                     case 3:
                         if (args.Length > 1)
                         {
@@ -71,15 +73,18 @@ namespace Chess.MVC.Controller
                             DoubleMove(args);
 
                         }
-                        break;
+                        return pieces;
                     case 0:
                         exit = true;
-                        break;
+                        return pieces;
                 }
             } while (!exit);
+            return pieces;
+
         }
-        public static void Setup(string[] args)
+        public static List<Piece> Setup(string[] args)
         {
+            List<Piece> pieces = new List<Piece>();
             if (args.Length > 0)
             {
                 //Console.WriteLine("What is your file name");
@@ -90,6 +95,72 @@ namespace Chess.MVC.Controller
                     content = content.ToUpper();
                     Console.WriteLine("Your Game Looks like: ");
                     string[] SplitArray = Regex.Split(content, "[\r\n]+");
+                    for (int i = 0; i < SplitArray.Length; i++)
+                    {
+                        char type = SplitArray[i][0]; //Piece type
+                        char color = SplitArray[i][1]; //Color
+                        int y = 0; //YLocation
+                        string tempY;
+                        int x = 0; //XLocation
+                        if (SplitArray[i][0] == 'K')
+                        {
+                            if (SplitArray[i][0 + 1] == 'N')
+                            {
+                                y = SplitArray[i][3];
+                                x = convertX(SplitArray[i][4]);
+                                //Knight knight = new Knight(color, x, y);
+                                pieces.Add(new Knight(color, x, y));
+
+                            }
+                        }
+
+                        switch (SplitArray[i][0])
+                        {
+
+                            case 'B':
+                                color = SplitArray[i][1];
+                                tempY = SplitArray[i][2].ToString();
+                                int.TryParse(tempY, out y);
+                                x = convertX(SplitArray[i][3]);
+                                //Bishop bishop = new Bishop(color, x, y);
+                                pieces.Add(new Bishop(color, x, y));
+                                break;
+                            case 'K':
+                                color = SplitArray[i][1];
+                                tempY = SplitArray[i][2].ToString();
+                                int.TryParse(tempY, out y);
+                                x = convertX(SplitArray[i][3]);
+                                //King king = new King(color, x, y);
+                                pieces.Add(new King(color, x, y));
+                                break;
+                            case 'P':
+                                color = SplitArray[i][1];
+                                tempY = SplitArray[i][2].ToString();
+                                int.TryParse(tempY, out y);
+                                x = convertX(SplitArray[i][3]);
+                                //Pawn pawn = new Pawn(color, x, y);
+                                pieces.Add(new Pawn(color, x, y));
+                                break;
+                            case 'Q':
+                                color = SplitArray[i][1];
+                                tempY = SplitArray[i][2].ToString();
+                                int.TryParse(tempY, out y);
+                                x = convertX(SplitArray[i][3]);
+                                //Queen queen = new Queen(color, x, y);
+                                pieces.Add(new Queen(color, x, y));
+                                break;
+                            case 'R':
+                                color = SplitArray[i][1];
+                                tempY = SplitArray[i][2].ToString();
+                                int.TryParse(tempY, out y);
+                                x = convertX(SplitArray[i][3]);
+                                //Rook rook = new Rook(color, x, y);
+                                pieces.Add(new Rook(color, x, y));
+                                break;
+                        }
+
+                    }
+                    Console.WriteLine(SplitArray[0][0]);
                     for (int i = 0; i < SplitArray.Length; i++)
                     {
                         if (SplitArray[i] == "")
@@ -107,6 +178,7 @@ namespace Chess.MVC.Controller
 
                     }
                 }
+                return pieces;
 
             }
             else
@@ -136,6 +208,7 @@ namespace Chess.MVC.Controller
                     NewContent.Clear();
 
                 }
+                return pieces;
             }
 
             if (NewContent.Count > 0)
@@ -311,6 +384,39 @@ namespace Chess.MVC.Controller
                     //args[0].Insert(0,allFiles[choice-1]);
                 }
             } while (!exit);
+        }
+
+        public static int convertX(char tempX)
+        {
+            int x = 0;
+            switch (tempX)
+            {
+                case 'A':
+                    x = 0;
+                    break;
+                case 'B':
+                    x = 1;
+                    break;
+                case 'C':
+                    x = 2;
+                    break;
+                case 'D':
+                    x = 3;
+                    break;
+                case 'E':
+                    x = 4;
+                    break;
+                case 'F':
+                    x = 5;
+                    break;
+                case 'G':
+                    x = 6;
+                    break;
+                case 'H':
+                    x = 7;
+                    break;
+            }
+            return x;
         }
     }
 }

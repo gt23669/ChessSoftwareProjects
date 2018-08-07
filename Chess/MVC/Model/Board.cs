@@ -11,7 +11,7 @@ namespace Chess.MVC.Model
         
         public string[][] gameBoard = new string[8][];
 
-        public void GenerateBoard()
+        public string[][] GenerateBoard()
         {
             for (int i = 0; i < gameBoard.Length; i++)
             {
@@ -20,15 +20,15 @@ namespace Chess.MVC.Model
                 {
                     if (j == 17)
                     {
-                        gameBoard[i][j] = "\r\n";
+                        Console.Write(gameBoard[i][j] = "\r\n");
                     }
                     else if (j%2 == 0)
                     {
-                        gameBoard[i][j] = "|";
+                        Console.Write(gameBoard[i][j] = "|");
                     }
                     else
                     {
-                        gameBoard[i][j] = "_";
+                        Console.Write(gameBoard[i][j] = "_");
                     }
                    
                 }
@@ -41,6 +41,19 @@ namespace Chess.MVC.Model
             //        Console.WriteLine(gameBoard[i][j]);
             //    }
             //}
+            return gameBoard;
+        }
+
+        public string[][] printBoard(List<Piece> pieces, string[][] newBoard)
+        {
+
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                int x = 0;
+                int y = 0;
+                //x = pieces[i].
+            }
+            return newBoard;
         }
     }
 }

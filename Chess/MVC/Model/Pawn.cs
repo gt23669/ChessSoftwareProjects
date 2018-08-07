@@ -8,9 +8,20 @@ namespace Chess.MVC.Model
 {
     class Pawn : Piece
     {
-        string name = "Pawn";
-        string ID = "P";
+        //string name = "Pawn";
+        //string ID = "P";
+        char color;
+        int xLoc;
+        int yLoc;
 
+        public Pawn(char color, int xLoc, int yLoc)
+        {
+            string name = "Pawn";
+            string ID = "P";
+            this.color = color;
+            this.xLoc = xLoc;
+            this.yLoc = yLoc;
+        }
 
         public override bool Check()
         {
