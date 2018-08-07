@@ -113,6 +113,7 @@ namespace Chess.MVC.Controller
                         {
                             if (SplitArray[i][0 + 1] == 'N')
                             {
+                                color = SplitArray[i][2];
                                 tempY = SplitArray[i][3].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][4]);
@@ -122,6 +123,7 @@ namespace Chess.MVC.Controller
                                     knight.ID = knight.ID.ToLower();
                                 }
                                 pieces.Add(knight);
+                                continue;
 
                             }
                         }
