@@ -98,7 +98,8 @@ namespace Chess.MVC.Controller
                     for (int i = 0; i < SplitArray.Length; i++)
                     {
                         char type = SplitArray[i][0]; //Piece type
-                        char color = SplitArray[i][1]; //Color
+                        char color = SplitArray[i][1];
+                        //Color
                         int y = 0; //YLocation
                         string tempY;
                         int x = 0; //XLocation
@@ -106,10 +107,15 @@ namespace Chess.MVC.Controller
                         {
                             if (SplitArray[i][0 + 1] == 'N')
                             {
-                                y = SplitArray[i][3];
+                                tempY = SplitArray[i][3].ToString();
+                                int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][4]);
-                                //Knight knight = new Knight(color, x, y);
-                                pieces.Add(new Knight(color, x, y));
+                                Piece knight = new Knight(color, x, y);
+                                if (knight.color =='D')
+                                {
+                                    knight.ID = knight.ID.ToLower();
+                                }
+                                pieces.Add(knight);
 
                             }
                         }
@@ -122,40 +128,60 @@ namespace Chess.MVC.Controller
                                 tempY = SplitArray[i][2].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][3]);
-                                //Bishop bishop = new Bishop(color, x, y);
-                                pieces.Add(new Bishop(color, x, y));
+                                Piece bishop = new Bishop(color, x, y);
+                                if (bishop.color == 'D')
+                                {
+                                    bishop.ID = bishop.ID.ToLower();
+                                }
+                                pieces.Add(bishop);
                                 break;
                             case 'K':
                                 color = SplitArray[i][1];
                                 tempY = SplitArray[i][2].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][3]);
-                                //King king = new King(color, x, y);
-                                pieces.Add(new King(color, x, y));
+                                Piece king = new King(color, x, y);
+                                if (king.color == 'D')
+                                {
+                                    king.ID = king.ID.ToLower();
+                                }
+                                pieces.Add(king);
                                 break;
                             case 'P':
                                 color = SplitArray[i][1];
                                 tempY = SplitArray[i][2].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][3]);
-                                //Pawn pawn = new Pawn(color, x, y);
-                                pieces.Add(new Pawn(color, x, y));
+                                Piece pawn = new Pawn(color, x, y);
+                                if (pawn.color == 'D')
+                                {
+                                    pawn.ID = pawn.ID.ToLower();
+                                }
+                                pieces.Add(pawn);
                                 break;
                             case 'Q':
                                 color = SplitArray[i][1];
                                 tempY = SplitArray[i][2].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][3]);
-                                //Queen queen = new Queen(color, x, y);
-                                pieces.Add(new Queen(color, x, y));
+                                Piece queen = new Queen(color, x, y);
+                                if (queen.color == 'D')
+                                {
+                                    queen.ID = queen.ID.ToLower();
+                                }
+                                pieces.Add(queen);
                                 break;
                             case 'R':
                                 color = SplitArray[i][1];
                                 tempY = SplitArray[i][2].ToString();
                                 int.TryParse(tempY, out y);
                                 x = convertX(SplitArray[i][3]);
-                                //Rook rook = new Rook(color, x, y);
-                                pieces.Add(new Rook(color, x, y));
+                                Piece rook = new Rook(color, x, y);
+                                if (rook.color == 'D')
+                                {
+                                    rook.ID = rook.ID.ToLower();
+                                }
+                                pieces.Add(rook);
                                 break;
                         }
 
@@ -183,7 +209,6 @@ namespace Chess.MVC.Controller
             }
             else
             {
-                bool valid = false;
 
                 Console.WriteLine("What is the new file name?");
                 string input = Console.ReadLine();

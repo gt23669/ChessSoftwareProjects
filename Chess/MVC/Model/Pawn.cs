@@ -8,24 +8,25 @@ namespace Chess.MVC.Model
 {
     class Pawn : Piece
     {
-        //string name = "Pawn";
-        //string ID = "P";
-        char color;
-        int xLoc;
-        int yLoc;
 
-        public Pawn(char color, int xLoc, int yLoc)
+        //char color;
+        //int xLoc;
+        //int yLoc;
+
+        public Pawn(char color, int col, int row)
         {
-            string name = "Pawn";
-            string ID = "P";
-            this.color = color;
-            this.xLoc = xLoc;
-            this.yLoc = yLoc;
+            base.name = "Pawn";
+            base.ID = "P";
+            base.color = color;
+            base.col = col;
+            base.row = row;
         }
 
-        public override bool Check()
-        {
-            throw new NotImplementedException();
-        }
+
+
+        //public override bool Check()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Chess.MVC.Model
 {
-    abstract class Piece
+    class Piece
+    { 
+        public string name;
+        public string ID;
+        public char color;
+        public int col;
+        public int row;
+        //public abstract bool Check();
 
-    {
-        //string name;
-        //string ID;
-        //char color;
-        //int xLoc;
-        //int yLoc;
-
-        public abstract bool Check();
-        
     }
 }

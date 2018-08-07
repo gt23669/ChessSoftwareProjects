@@ -18,9 +18,11 @@ namespace Chess
         {
             List<Piece> pieces = new List<Piece>();
             Board board = new Board();
-            gameBoard = board.GenerateBoard();
-            gameBoard = board.printBoard(pieces, gameBoard);
+            //gameBoard = board.GenerateBoard();
             pieces = GameSetup.Menu(args);
+            gameBoard = board.printBoard(pieces);
+            board.printNewBoard(gameBoard);
+            
             //GameSetup.Setup(args);
             //GameSetup.Move(args);
         }
