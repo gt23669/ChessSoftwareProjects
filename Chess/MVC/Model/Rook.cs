@@ -8,22 +8,22 @@ namespace Chess.MVC.Model
 {
     class Rook : Piece
     {
-        string name = "Rook";
-        string ID = "R";
-        char color;
-        int xLoc;
-        int yLoc;
+        //char color;
+        //int xLoc;
+        //int yLoc;
 
-        public Rook(char color, int xLoc, int yLoc)
+        public Rook(char color, int col, int row)
         {
-            this.color = color;
-            this.xLoc = xLoc;
-            this.yLoc = yLoc;
+            base.name = "Rook";
+            base.ID = "R";
+            base.color = color;
+            base.col = col;
+            base.row = row;
         }
 
-        public override bool Check()
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Check()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

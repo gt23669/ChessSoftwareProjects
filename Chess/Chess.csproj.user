@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+<<<<<<< HEAD
     <StartArguments>DefaultSetup.txt</StartArguments>
+=======
+<<<<<<< HEAD
+    <StartArguments>DefaultSetup.txt MoveTests1.txt</StartArguments>
+    <StartWorkingDirectory>
+    </StartWorkingDirectory>
+=======
+    <StartArguments>DefaultSetup.txt</StartArguments>
+>>>>>>> 84c79168cac0c09ed7d6cfd66dd0bcd8a2d8a054
+>>>>>>> 3fb8ec1a8332ee4a3e1cdefecba10b21fafd987d
   </PropertyGroup>
 </Project>

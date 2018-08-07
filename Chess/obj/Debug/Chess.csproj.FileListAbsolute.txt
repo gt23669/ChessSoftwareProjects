@@ -22,3 +22,12 @@ C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSof
 C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.pdb
 C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.dll.config
 C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CopyComplete
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.pdb
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.dll.config
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CopyComplete
+=======
+>>>>>>> 84c79168cac0c09ed7d6cfd66dd0bcd8a2d8a054
+>>>>>>> 3fb8ec1a8332ee4a3e1cdefecba10b21fafd987d

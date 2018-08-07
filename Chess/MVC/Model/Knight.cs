@@ -8,23 +8,27 @@ namespace Chess.MVC.Model
 {
     class Knight : Piece
     {
-        string name = "Knight";
-        string ID = "KN";
-        char color;
-        int xLoc;
-        int yLoc;
 
-        public Knight(char color, int xLoc, int yLoc)
+        //char color;
+        //int xLoc;
+        //int row;
+
+        public Knight(char color, int col, int row)
         {
-            this.color = color;
-            this.xLoc = xLoc;
-            this.yLoc = yLoc;
+            base.name = "Knight";
+            base.ID = "N";
+            base.color = color;
+            base.col = col;
+            base.row = row;
         }
 
 
-        public override bool Check()
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+        //public override bool Check()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

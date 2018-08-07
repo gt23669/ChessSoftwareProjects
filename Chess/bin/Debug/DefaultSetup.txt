@@ -9,8 +9,8 @@ Pl6H
 Rl7A
 KNl7B
 Bl7C
-Kl7D
-Ql7E
+Kl7E
+Ql7D
 Bl7F
 KNl7G
 Rl7H
