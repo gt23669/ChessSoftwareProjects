@@ -37,6 +37,7 @@ namespace Chess.MVC.Model
 
             for (int i = 0; i < gameBoard.Length; i++)
             {
+<<<<<<< HEAD
                 gameBoard[i] = new string[8];
 
             }
@@ -46,6 +47,24 @@ namespace Chess.MVC.Model
                 for (int j = 0; j < gameBoard[i].Length; j++)
                 {
                     gameBoard[i][j] = "-";
+=======
+                gameBoard[i] = new string[34];
+                for (int j = 0; j < gameBoard[i].Length; j++)
+                {
+                    if (j == 33)
+                    {
+                        Console.Write(gameBoard[i][j] = "\r\n");
+                    }
+                    else if (j%4 == 0)
+                    {
+                        Console.Write(gameBoard[i][j] = "|");
+                    }
+                    else
+                    {
+                        Console.Write(gameBoard[i][j] = "_");
+                    }
+                   
+>>>>>>> 84c79168cac0c09ed7d6cfd66dd0bcd8a2d8a054
                 }
             }
 
