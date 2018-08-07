@@ -26,6 +26,10 @@ namespace Chess
             GameSetup.Menu(args);
             //board.printNewBoard(gameBoard);
 
+            Board board = new Board();
+            gameBoard = board.GenerateBoard();
+            gameBoard = board.printBoard(pieces, gameBoard);
+            pieces = GameSetup.Menu(args);
             //GameSetup.Setup(args);
             //GameSetup.Move(args);
         }

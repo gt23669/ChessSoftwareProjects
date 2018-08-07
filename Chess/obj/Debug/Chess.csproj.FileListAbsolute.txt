@@ -1,0 +1,27 @@
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe.config
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\bin\Debug\Chess.pdb
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\obj\Debug\Chess.csprojAssemblyReference.cache
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\obj\Debug\Chess.exe
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\ChessSoftwareProjects\Chess\obj\Debug\Chess.pdb
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe.config
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\Chess.pdb
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.csprojAssemblyReference.cache
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.exe
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.pdb
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe.config
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\Chess.exe
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\Chess.pdb
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.csprojAssemblyReference.cache
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.exe
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.pdb
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.pdb
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.dll.config
+C:\Users\Aj\OneDrive - Neumont College of Computer Science\repos\GitHub\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CopyComplete
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.pdb
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\bin\Debug\DCorum_CIO.dll.config
+C:\Users\Daniel Corum\VisualStudio\C#\Chess\ChessSoftwareProjects\Chess\obj\Debug\Chess.csproj.CopyComplete
