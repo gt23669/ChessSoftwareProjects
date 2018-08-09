@@ -20,59 +20,40 @@ namespace Chess.MVC.Model
                 {
                     if (j == 33)
                     {
-                        Console.Write(gameBoard[i][j] = "\r\n");
+                        gameBoard[i][j] = "\r\n";
+                        //Console.Write(gameBoard[i][j] = "\r\n");
                     }
                     else if (j % 4 == 0)
                     {
-                        Console.Write(gameBoard[i][j] = "|");
+                        gameBoard[i][j] = "|";
+                        //Console.Write(gameBoard[i][j] = "|");
                     }
                     else
                     {
-                        Console.Write(gameBoard[i][j] = "_");
+                        gameBoard[i][j] = "_";
+                        //Console.Write(gameBoard[i][j] = "_");
                     }
 
                 }
 
             }
 
-            //for (int i = 0; i < gameBoard.Length; i++)
-            //{
-            //    gameBoard[i] = new string[8];
 
-            //}
-            //for (int i = 0; i < gameBoard.Length; i++)
-            //{
 
-            //    for (int j = 0; j < gameBoard[i].Length; j++)
-            //    {
-            //        gameBoard[i][j] = "-";
-            //    }
-            //}
-
-            //for (int i = 0; i < gameBoard.Length; i++)
-            //{
-            //    for (int j = 0; j < gameBoard[i].Length; j++)
-            //    {
-            //        //Console.Write(gameBoard[i][j]);
-            //        Console.Write($"{gameBoard[i][j]}");
-            //    }
-            //    Console.WriteLine();
-            //}
-           
             return gameBoard;
         }
 
-        public string[][] printBoard(List<Piece> pieces)
+        public string[][] fillBoard(List<Piece> pieces)
         {
             for (int i = 0; i < pieces.Count; i++)
             {
                 int col;
                 int row;
-                Console.WriteLine(col = pieces[i].col);
-                Console.WriteLine(row = pieces[i].row);
-               
+                col = pieces[i].col;
+                row = pieces[i].row;
+
                 gameBoard[row][col] = pieces[i].ID;
-               printNewBoard(gameBoard);
+                printNewBoard(gameBoard);
             }
             return gameBoard;
         }
@@ -88,7 +69,7 @@ namespace Chess.MVC.Model
                     Console.Write($"{gameBoard[i][j]}");
                 }
                 Console.WriteLine();
-              
+
             }
 
 
