@@ -30,7 +30,10 @@ namespace Chess.MVC.Model
 
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
-            throw new NotImplementedException();
+            bool valid = false;
+            
+
+            return valid;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
-        
+
         public override string ToString()
         {
             return ID;
@@ -28,7 +28,165 @@ namespace Chess.MVC.Model
 
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
-            throw new NotImplementedException();
+            bool valid = false;
+            if (nextRow > 7 || nextCol > 7)
+            {
+                return valid;
+            }
+
+            if (col-nextCol == 0 )//moving vertically
+            {
+                for (int i = row; i < gameBoard.Length; i++)
+                {
+                    if (row+i>7)
+                    {
+                        break;
+                    }
+                    if (gameBoard[row+i][col] == gameBoard[nextRow][nextCol])
+                    {
+                        for (int j = 0; j < gameBoard.Length; j++)
+                        {
+                            if (gameBoard[row+j][col] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                //if (gameBoard[row+1][col].color == 'L')
+                                //{
+                                //    valid = true;
+                                //}
+                                //else
+                                //{
+                                //    valid = false;
+                                //    return valid;
+                                //}
+                                valid = false;
+                                break;
+                            }
+                        }
+                    return valid;
+                    }
+                    else
+                    {
+                        valid = false;
+                    }
+                }
+                for (int i = row; i < gameBoard.Length; i++)
+                {
+                    if (row - i < 0)
+                    {
+                        break;
+                    }
+                    if (gameBoard[row - i][col] == gameBoard[nextRow][nextCol])
+                    {
+                        for (int j = 0; j < gameBoard.Length; j++)
+                        {
+                            if (gameBoard[row - j][col] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                //if (gameBoard[row+1][col].color == 'L')
+                                //{
+                                //    valid = true;
+                                //}
+                                //else
+                                //{
+                                //    valid = false;
+                                //    return valid;
+                                //}
+                                valid = false;
+                                break;
+                            }
+                        }
+                    return valid;
+                    }
+                    else
+                    {
+                        valid = false;
+                    }
+                }
+            }
+            if (row-nextRow == 0)//moving horizontally
+            {
+                for (int i = col; i < gameBoard.Length; i++)
+                {
+                    if (col + i > 7)
+                    {
+                        break;
+                    }
+                    if (gameBoard[row][col+i] == gameBoard[nextRow][nextCol])
+                    {
+                        for (int j = 0; j < gameBoard.Length; j++)
+                        {
+                            if (gameBoard[row][col+j] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                //if (gameBoard[row+1][col].color == 'L')
+                                //{
+                                //    valid = true;
+                                //}
+                                //else
+                                //{
+                                //    valid = false;
+                                //    return valid;
+                                //}
+                                valid = false;
+                                break;
+                            }
+                        }
+                        return valid;
+                    }
+                    else
+                    {
+                        valid = false;
+                    }
+                }
+                for (int i = col; i < gameBoard.Length; i++)
+                {
+                    if (col - i < 0)
+                    {
+                        break;
+                    }
+                    if (gameBoard[row][col-i] == gameBoard[nextRow][nextCol])
+                    {
+
+                        for (int j = 0; j < gameBoard.Length; j++)
+                        {
+                            if (gameBoard[row][col-j] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                //if (gameBoard[row+1][col].color == 'L')
+                                //{
+                                //    valid = true;
+                                //}
+                                //else
+                                //{
+                                //    valid = false;
+                                //    return valid;
+                                //}
+                                valid = false;
+                                break;
+                            }
+                        }
+                        return valid;
+                    }
+                    else
+                    {
+                        valid = false;
+                    }
+                }
+            }
+
+            return valid;
         }
     }
 }

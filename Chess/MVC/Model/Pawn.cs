@@ -26,44 +26,63 @@ namespace Chess.MVC.Model
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
             bool valid = false;
+            if (nextRow>7)
+            {
+                return valid;
+            }
             if (color == 'D')
             {
-                if (nextRow > row)
+                if (nextRow - row == 1)
                 {
-                    if (gameBoard[row + 1][col] != null)
+                    if (nextRow > row)
                     {
+                        if (gameBoard[row + 1][col] == null)
+                        {
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                        }
 
-                        valid = true;
                     }
                     else
                     {
-                        Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                        Console.WriteLine("Pawns can not move backwards");
                     }
-
                 }
                 else
                 {
-                    Console.WriteLine("Pawns can not move backwards");
+                    return false;
                 }
+
             }
             else
             {
-                if (nextRow < row)
+                if (nextRow - row == -1)
                 {
-                    if (gameBoard[row - 1][col] != null)
+                    if (nextRow < row)
                     {
+                        if (gameBoard[row - 1][col] == null)
+                        {
 
-                        valid = true;
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                        Console.WriteLine("Pawns can not move backwards");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Pawns can not move backwards");
+                    return false;
                 }
+
             }
 
             return valid;

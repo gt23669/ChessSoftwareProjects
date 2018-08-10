@@ -173,23 +173,30 @@ namespace Chess.MVC.Controller
                 //Console.WriteLine($"count = {i}");
                 if (SplitArray[i] == "" || currentRow > 7 || currentCol > 7 || nextCol > 7 || NextRow > 7)
                 {
-
+                    continue;
                 }
                 else
                 {
-                    if (gameBoard[currentRow][currentCol]!=null)
+                    if (gameBoard[currentRow][currentCol].Check(gameBoard,NextRow,nextCol))
                     {
-                        Console.WriteLine(i);
                         Piece temp = gameBoard[currentRow][currentCol];
-                        gameBoard[currentRow][currentCol] = null;
                         gameBoard[NextRow][nextCol] = temp;
+                        gameBoard[currentRow][currentCol] = null;
                         board.printNewBoard(gameBoard);
-                        Console.WriteLine();
                     }
-                    else
-                    {
-                        continue;
-                    }
+                    //if (gameBoard[currentRow][currentCol]!=null)
+                    //{
+                    //    Console.WriteLine(i);
+                    //    Piece temp = gameBoard[currentRow][currentCol];
+                    //    gameBoard[currentRow][currentCol] = null;
+                    //    gameBoard[NextRow][nextCol] = temp;
+                    //    board.printNewBoard(gameBoard);
+                    //    Console.WriteLine();
+                    //}
+                    //else
+                    //{
+                    //    continue;
+                    //}
                 }
                 //else
                 //{
