@@ -13,7 +13,7 @@ namespace Chess.MVC.Controller
     class GameSetup
     {
         static Board board = new Board();
-        static string[][] gameBoard = new string[8][];
+        static Piece[][] gameBoard = new Piece[8][];
         static List<Piece> pieces = new List<Piece>();
         internal static void Menu(string[] args)
         {
@@ -159,7 +159,11 @@ namespace Chess.MVC.Controller
         {
             for (int i = 0; i < SplitArray.Length && i < 8100; i++)
             {
-                Piece MovedPiece = null;
+                //Piece MovedPiece = null;
+                if (SplitArray[i][0] == 'I' || SplitArray[i][2] == 'I')
+                {
+                    continue;
+                }
                 int currentCol = convertX(SplitArray[i][0]);
                 int currentRow;
                 int.TryParse(SplitArray[i][1].ToString(), out currentRow);
@@ -167,56 +171,72 @@ namespace Chess.MVC.Controller
                 int NextRow;
                 int.TryParse(SplitArray[i][1].ToString(), out NextRow);
                 //Console.WriteLine($"count = {i}");
-                if (SplitArray[i] == "" || currentRow > 7 || currentCol > 34 || nextCol > 7 || NextRow > 34)
+                if (SplitArray[i] == "" || currentRow > 7 || currentCol > 7 || nextCol > 7 || NextRow > 7)
                 {
 
                 }
                 else
                 {
-                    if (gameBoard[currentRow][currentCol].ToLower() == "p")
+                    if (gameBoard[currentRow][currentCol]!=null)
                     {
-                        MovedPiece = new Pawn();
-                    }
-                    if (gameBoard[currentRow][currentCol].ToLower() == "b")
-                    {
-                        MovedPiece = new Bishop();
-                    }
-                    if (gameBoard[currentRow][currentCol].ToLower() == "r")
-                    {
-                        MovedPiece = new Rook();
-                    }
-                    if (gameBoard[currentRow][currentCol].ToLower() == "n")
-                    {
-                        MovedPiece = new Knight();
-                    }
-                    if (gameBoard[currentRow][currentCol].ToLower() == "k")
-                    {
-                        MovedPiece = new King();
-                    }
-                    if (gameBoard[currentRow][currentCol].ToLower() == "q")
-                    {
-                        MovedPiece = new Queen();
-                    }
-
-                    bool MoveCheck = MovedPiece.Check();
-                    if (MoveCheck)
-                    {
-
-                    if (gameBoard[currentRow][currentCol] != "_" && gameBoard[currentRow][currentCol] != "|")
-                    {
-                        string temp = gameBoard[currentRow][currentCol];
-                        gameBoard[currentRow][currentCol] = "_";
+                        Console.WriteLine(i);
+                        Piece temp = gameBoard[currentRow][currentCol];
+                        gameBoard[currentRow][currentCol] = null;
                         gameBoard[NextRow][nextCol] = temp;
                         board.printNewBoard(gameBoard);
-                    }
+                        Console.WriteLine();
                     }
                     else
                     {
-                        Console.WriteLine("this Move Isnt possible");
+                        continue;
                     }
-
-
                 }
+                //else
+                //{
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "p")
+                //    {
+                //        MovedPiece = new Pawn();
+                //    }
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "b")
+                //    {
+                //        MovedPiece = new Bishop();
+                //    }
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "r")
+                //    {
+                //        MovedPiece = new Rook();
+                //    }
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "n")
+                //    {
+                //        MovedPiece = new Knight();
+                //    }
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "k")
+                //    {
+                //        MovedPiece = new King();
+                //    }
+                //    if (gameBoard[currentRow][currentCol].ToLower() == "q")
+                //    {
+                //        MovedPiece = new Queen();
+                //    }
+
+                //    bool MoveCheck = MovedPiece.Check();
+                //    if (MoveCheck)
+                //    {
+
+                //    if (gameBoard[currentRow][currentCol] != "_" && gameBoard[currentRow][currentCol] != "|")
+                //    {
+                //        string temp = gameBoard[currentRow][currentCol];
+                //        gameBoard[currentRow][currentCol] = "_";
+                //        gameBoard[NextRow][nextCol] = temp;
+                //        board.printNewBoard(gameBoard);
+                //    }
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("this Move Isnt possible");
+                //    }
+
+
+                //}
 
             }
             board.printNewBoard(gameBoard);
@@ -227,28 +247,36 @@ namespace Chess.MVC.Controller
             switch (tempX)
             {
                 case 'A':
-                    x = 2;
+                    //x = 2;
+                    x = 0;
                     break;
                 case 'B':
-                    x = 6;
+                    //x = 6;
+                    x = 1;
                     break;
                 case 'C':
-                    x = 10;
+                    //x = 10;
+                    x = 2;
                     break;
                 case 'D':
-                    x = 14;
+                    //x = 14;
+                    x = 3;
                     break;
                 case 'E':
-                    x = 18;
+                    //x = 18;
+                    x = 4;
                     break;
                 case 'F':
-                    x = 22;
+                    //x = 22;
+                    x = 5;
                     break;
                 case 'G':
-                    x = 26;
+                    //x = 26;
+                    x = 6;
                     break;
                 case 'H':
-                    x = 30;
+                    //x = 30;
+                    x = 7;
                     break;
             }
             return x;

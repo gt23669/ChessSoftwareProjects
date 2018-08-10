@@ -22,9 +22,16 @@ namespace Chess.MVC.Model
             base.row = row;
         }
         public King() { }
-        public override bool Check()
+        
+
+        public override string ToString()
         {
-            return false;
+            return ID;
+        }
+
+        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,13 +20,59 @@ namespace Chess.MVC.Model
             base.color = color;
             base.col = col;
             base.row = row;
+            bool firstMove = false;
         }
         public Pawn() { }
 
-
-        public override bool Check()
+        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
-            throw new NotImplementedException();
+            bool valid = false;
+            if (color == 'D')
+            {
+                if (nextRow > row)
+                {
+                    if (gameBoard[row + 1][col] != null)
+                    {
+
+                        valid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Pawns can not move backwards");
+                }
+            }
+            else
+            {
+                if (nextRow < row)
+                {
+                    if (gameBoard[row - 1][col] != null)
+                    {
+
+                        valid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pawns can not take other pieces when moving vertically");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Pawns can not move backwards");
+                }
+            }
+
+            return valid;
+        }
+
+        public override string ToString()
+        {
+            return ID;
         }
     }
 }

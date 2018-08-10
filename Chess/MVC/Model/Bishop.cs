@@ -24,7 +24,14 @@ namespace Chess.MVC.Model
         {
 
         }
-        public override bool Check()
+      
+
+        public override string ToString()
+        {
+            return ID;
+        }
+
+        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
             throw new NotImplementedException();
         }

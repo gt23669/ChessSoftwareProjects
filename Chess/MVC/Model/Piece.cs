@@ -13,7 +13,10 @@ namespace Chess.MVC.Model
         public char color;
         public int col;
         public int row;
-        public abstract bool Check();
+        public abstract bool Check(Piece[][] gameBoard, int nextRow, int nextCol);
+
+        override
+        public abstract string ToString();
 
     }
 }
