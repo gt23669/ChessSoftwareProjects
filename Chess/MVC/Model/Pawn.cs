@@ -22,7 +22,6 @@ namespace Chess.MVC.Model
             base.row = row;
             bool firstMove = false;
         }
-        public Pawn() { }
 
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {

@@ -20,10 +20,6 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
-        public Bishop()
-        {
-
-        }
       
 
         public override string ToString()

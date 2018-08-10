@@ -20,8 +20,6 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
-        public Rook() { }
-
         
         public override string ToString()
         {

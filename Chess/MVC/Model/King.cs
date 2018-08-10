@@ -21,7 +21,6 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
-        public King() { }
         
 
         public override string ToString()
