@@ -20,10 +20,13 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
+        public Bishop()
+        {
 
-        //public override bool Check()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }
+        public override bool Check()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

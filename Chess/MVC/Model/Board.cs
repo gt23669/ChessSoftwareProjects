@@ -53,7 +53,6 @@ namespace Chess.MVC.Model
                 row = pieces[i].row;
 
                 gameBoard[row][col] = pieces[i].ID;
-                printNewBoard(gameBoard);
             }
             return gameBoard;
         }
@@ -71,9 +70,6 @@ namespace Chess.MVC.Model
                 Console.WriteLine();
 
             }
-
-
-
             Console.WriteLine();
         }
     }

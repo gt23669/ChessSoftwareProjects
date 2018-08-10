@@ -21,14 +21,14 @@ namespace Chess.MVC.Model
             base.col = col;
             base.row = row;
         }
+        public Knight() { }
 
 
 
 
-
-        //public override bool Check()
-        //{
-        //    throw new NotImplementedException();
-        //}
+       public override bool Check()
+       {
+           throw new NotImplementedException();
+       }
     }
 }

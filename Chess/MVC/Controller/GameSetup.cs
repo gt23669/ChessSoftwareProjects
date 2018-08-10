@@ -53,61 +53,6 @@ namespace Chess.MVC.Controller
             } while (!exit);
         }
 
-        private static void move(string[] SplitArray)
-        {
-            for (int i = 0; i < SplitArray.Length && i < 8100; i++)
-            {
-                int currentCol = convertX(SplitArray[i][0]);
-                int currentRow;
-                int.TryParse(SplitArray[i][1].ToString(), out currentRow);
-                int nextCol = convertX(SplitArray[i][2]);
-                int NextRow;
-                int.TryParse(SplitArray[i][1].ToString(), out NextRow);
-                //Console.WriteLine($"count = {i}");
-                if (SplitArray[i] == "" || currentRow > 7 || currentCol > 34 || nextCol > 7 || NextRow > 34)
-                {
-
-                }
-                else
-                {
-                    if (gameBoard[currentRow][currentCol] != "_" && gameBoard[currentRow][currentCol] != "|")
-                    {
-                        string temp = gameBoard[currentRow][currentCol];
-                        gameBoard[currentRow][currentCol] = "_";
-                        gameBoard[NextRow][nextCol] = temp;
-                        board.printNewBoard(gameBoard);
-                    }
-
-                }
-
-            }
-            board.printNewBoard(gameBoard);
-        }
-
-        private static string[] readInPieces(string args)
-        {
-            string content = File.ReadAllText(args);
-            content = content.ToUpper();
-            string[] SplitArray = Regex.Split(content, "[\r\n]+");
-            for (int i = 0; i < SplitArray.Length; i++)
-            {
-                if (SplitArray[i] == "")
-                {
-
-                }
-                else
-                {
-                    SplitArray[i] = SplitArray[i].Replace(" ", "");
-                }
-
-            }
-            return SplitArray;
-
-
-        }
-
-
-
         private static void setupBoard(string args)
         {
 
@@ -209,6 +154,73 @@ namespace Chess.MVC.Controller
 
         }
 
+
+        public static void move(string[] SplitArray)
+        {
+            for (int i = 0; i < SplitArray.Length && i < 8100; i++)
+            {
+                Piece MovedPiece = null;
+                int currentCol = convertX(SplitArray[i][0]);
+                int currentRow;
+                int.TryParse(SplitArray[i][1].ToString(), out currentRow);
+                int nextCol = convertX(SplitArray[i][2]);
+                int NextRow;
+                int.TryParse(SplitArray[i][1].ToString(), out NextRow);
+                //Console.WriteLine($"count = {i}");
+                if (SplitArray[i] == "" || currentRow > 7 || currentCol > 34 || nextCol > 7 || NextRow > 34)
+                {
+
+                }
+                else
+                {
+                    if (gameBoard[currentRow][currentCol].ToLower() == "p")
+                    {
+                        MovedPiece = new Pawn();
+                    }
+                    if (gameBoard[currentRow][currentCol].ToLower() == "b")
+                    {
+                        MovedPiece = new Bishop();
+                    }
+                    if (gameBoard[currentRow][currentCol].ToLower() == "r")
+                    {
+                        MovedPiece = new Rook();
+                    }
+                    if (gameBoard[currentRow][currentCol].ToLower() == "n")
+                    {
+                        MovedPiece = new Knight();
+                    }
+                    if (gameBoard[currentRow][currentCol].ToLower() == "k")
+                    {
+                        MovedPiece = new King();
+                    }
+                    if (gameBoard[currentRow][currentCol].ToLower() == "q")
+                    {
+                        MovedPiece = new Queen();
+                    }
+
+                    bool MoveCheck = MovedPiece.Check();
+                    if (MoveCheck)
+                    {
+
+                    if (gameBoard[currentRow][currentCol] != "_" && gameBoard[currentRow][currentCol] != "|")
+                    {
+                        string temp = gameBoard[currentRow][currentCol];
+                        gameBoard[currentRow][currentCol] = "_";
+                        gameBoard[NextRow][nextCol] = temp;
+                        board.printNewBoard(gameBoard);
+                    }
+                    }
+                    else
+                    {
+                        Console.WriteLine("this Move Isnt possible");
+                    }
+
+
+                }
+
+            }
+            board.printNewBoard(gameBoard);
+        }
         public static int convertX(char tempX)
         {
             int x = 0;
@@ -241,6 +253,34 @@ namespace Chess.MVC.Controller
             }
             return x;
         }
+
+
+        private static string[] readInPieces(string args)
+        {
+            string content = File.ReadAllText(args);
+            content = content.ToUpper();
+            string[] SplitArray = Regex.Split(content, "[\r\n]+");
+            for (int i = 0; i < SplitArray.Length; i++)
+            {
+                if (SplitArray[i] == "")
+                {
+
+                }
+                else
+                {
+                    SplitArray[i] = SplitArray[i].Replace(" ", "");
+                }
+
+            }
+            return SplitArray;
+
+
+        }
+
+
+
+
+
     }
 }
 
