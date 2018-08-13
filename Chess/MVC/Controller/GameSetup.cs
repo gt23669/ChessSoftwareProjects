@@ -157,7 +157,11 @@ namespace Chess.MVC.Controller
 
         public static void move(string[] SplitArray)
         {
-            for (int i = 0; i < SplitArray.Length && i < 8100; i++)
+            bool valid = true;
+
+
+
+            for (int i = PlayGame.MoveNumber(); i < SplitArray.Length; i++)
             {
                 //Piece MovedPiece = null;
 
@@ -185,33 +189,26 @@ namespace Chess.MVC.Controller
                             gameBoard[currentRow][currentCol] = null;
                             gameBoard[NextRow][nextCol].row = NextRow;
                             gameBoard[NextRow][nextCol].col = nextCol;
+
+                            PlayGame.turnFlip(i);
                             board.printNewBoard(gameBoard);
+                            break;
                         }
 
                     }
                     else
                     {
+                        valid = false;
                         Console.WriteLine("There is no piece to move");
                     }
-                    //if (gameBoard[currentRow][currentCol]!=null)
-                    //{
-                    //    Console.WriteLine(i);
-                    //    Piece temp = gameBoard[currentRow][currentCol];
-                    //    gameBoard[currentRow][currentCol] = null;
-                    //    gameBoard[NextRow][nextCol] = temp;
-                    //    board.printNewBoard(gameBoard);
-                    //    Console.WriteLine();
-                    //}
-                    //else
-                    //{
-                    //    continue;
-                    //}
+
                 }
 
 
             }
+
             board.printNewBoard(gameBoard);
-            Console.WriteLine("Final move complete");
+
         }
         public static int convertX(char tempX)
         {
@@ -255,7 +252,7 @@ namespace Chess.MVC.Controller
         }
 
 
-        private static string[] readInPieces(string args)
+        public static string[] readInPieces(string args)
         {
 
             string content = File.ReadAllText(args);
