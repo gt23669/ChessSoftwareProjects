@@ -265,9 +265,29 @@ namespace Chess.MVC.Controller
             List<string> temp = new List<string>();
             for (int i = 0; i < SplitArray.Length; i++)
             {
-                if ((SplitArray[i][0] != 'I') && (SplitArray[i][3] != 'I'))
+                if (SplitArray[i].Length == 11)
                 {
-                    temp.Add(SplitArray[i]);
+                    string x = SplitArray[i].Substring(0, 5);
+                    string y = SplitArray[i].Substring(6, 5);
+                    string[] doubleString = new string[] { x, y };
+                    for (int j = 0; j < 2; j++)
+                    {
+                        if ((doubleString[j][0] != 'I') && (doubleString[j][3] != 'I'))
+                        {
+                            temp.Add(doubleString[j]);
+                        }
+
+                    }
+
+
+                }
+                else
+                {
+                    if ((SplitArray[i][0] != 'I') && (SplitArray[i][3] != 'I'))
+                    {
+                        temp.Add(SplitArray[i]);
+                    }
+
                 }
             }
 
