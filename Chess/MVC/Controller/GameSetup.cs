@@ -182,8 +182,8 @@ namespace Chess.MVC.Controller
                     {
                         if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
                         {
-                            board.printNewBoard(gameBoard);
                             Console.WriteLine();
+                            board.printNewBoard(gameBoard);
                             //Piece temp = gameBoard[currentRow][currentCol];
                             gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
                             gameBoard[currentRow][currentCol] = null;
@@ -191,7 +191,7 @@ namespace Chess.MVC.Controller
                             gameBoard[NextRow][nextCol].col = nextCol;
 
                             PlayGame.turnFlip(i);
-                            board.printNewBoard(gameBoard);
+                            
                             break;
                         }
 
@@ -206,7 +206,7 @@ namespace Chess.MVC.Controller
 
 
             }
-
+            Console.WriteLine();
             board.printNewBoard(gameBoard);
 
         }
