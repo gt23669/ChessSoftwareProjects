@@ -192,7 +192,6 @@ namespace Chess.MVC.Controller
 
                             PlayGame.turnFlip(i);
                             
-                            break;
                         }
 
                     }
