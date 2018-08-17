@@ -25,6 +25,7 @@ namespace Chess.MVC.Model
 
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
+            //check to make sure the pawn is not validating on a straight move when a piece is in front
             bool valid = false;
             if (nextRow > 7 || nextCol > 7)
             {
@@ -41,16 +42,26 @@ namespace Chess.MVC.Model
                 Console.WriteLine($"There is no piece to move");
                 return false;
             }
+            bool north = row - 1 == nextRow && col == nextCol;
+            bool northEastTake = row - 1 == nextRow && col + 1 == nextCol;
+            bool northWestTake = row - 1 == nextRow && col - 1 == nextCol;
+            bool northJump = row - 2 == nextRow && col == nextCol;
+            bool south = row + 1 == nextRow && col == nextCol;
+            bool southEastTake = row + 1 == nextRow && col + 1 == nextCol;
+            bool southWestTake = row + 1 == nextRow && col - 1 == nextCol;
+            bool southJump = row + 2 == nextRow && col == nextCol;
+
 
             if (color == 'L')
             {
 
-                if ((row - 2 == nextRow && col == nextCol) && !firstMove)
+                if ((northJump) && firstMove == false)
                 {
                     for (int i = 1; i < 3; i++)
                     {
-                        if (gameBoard[row - i][col] == null)
+                        if (gameBoard[row - 1][col] == null && gameBoard[row - 2][col] == null)
                         {
+                            firstMove = true;
                             valid = true;
                         }
                         else
@@ -60,10 +71,11 @@ namespace Chess.MVC.Model
                         }
                     }
                 }
-                else if (row - 1 == nextRow && col == nextCol)
+                else if (north)
                 {
                     if (gameBoard[row - 1][col] == null)
                     {
+                        firstMove = true;
                         valid = true;
                     }
                     else
@@ -72,28 +84,48 @@ namespace Chess.MVC.Model
                         valid = false;
                     }
                 }
-                else if (row - 1 == nextRow && col - 1 == nextCol)
+                else if (northWestTake)
                 {
-                    if (gameBoard[row - 1][col - 1].color != color)
+                    if (gameBoard[row - 1][col - 1] == null)
                     {
-                        valid = true;
+                        valid = false;
+                        Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
-                        Console.WriteLine("You can not take the same color piece");
-                        valid = false;
+                        if (gameBoard[row - 1][col - 1].color != this.color)
+                        {
+                            firstMove = true;
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can not take the same color piece");
+                            valid = false;
+                        }
+
                     }
                 }
-                else if (row - 1 == nextRow && col + 1 == nextCol)
+                else if (northEastTake)
                 {
-                    if (gameBoard[row - 1][col + 1].color != color)
+                    if (gameBoard[row - 1][col + 1] == null)
                     {
-                        valid = true;
+                        valid = false;
+                        Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
-                        Console.WriteLine("You can not take the same color piece");
-                        valid = false;
+                        if (gameBoard[row - 1][col + 1].color != color)
+                        {
+                            firstMove = true;
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can not take the same color piece");
+                            valid = false;
+                        }
+
                     }
                 }
                 else
@@ -105,25 +137,26 @@ namespace Chess.MVC.Model
             }
             else
             {
-                if ((row + 2 == nextRow && col == nextCol) && !firstMove)
+                if ((southJump) && firstMove != false)
                 {
-                    for (int i = 1; i < 3; i++)
+
+                    if (gameBoard[row + 1][col] == null && gameBoard[row + 2][col] == null)
                     {
-                        if (gameBoard[row - i][col] == null)
-                        {
-                            valid = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can not move past this piece");
-                            valid = false;
-                        }
+                        firstMove = true;
+                        valid = true;
                     }
-                }
-                else if (row + 1 == nextRow && col == nextCol)
-                {
-                    if (gameBoard[row - 1][col] == null)
+                    else
                     {
+                        Console.WriteLine("You can not move past this piece");
+                        valid = false;
+                    }
+
+                }
+                else if (south)
+                {
+                    if (gameBoard[row + 1][col] == null)
+                    {
+                        firstMove = true;
                         valid = true;
                     }
                     else
@@ -132,28 +165,48 @@ namespace Chess.MVC.Model
                         valid = false;
                     }
                 }
-                else if (row + 1 == nextRow && col + 1 == nextCol)
+                else if (southEastTake)
                 {
-                    if (gameBoard[row - 1][col - 1].color != color)
+                    if (gameBoard[row + 1][col + 1] == null)
                     {
-                        valid = true;
+                        valid = false;
+                        Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
-                        Console.WriteLine("You can not take the same color piece");
-                        valid = false;
+                        if (gameBoard[row + 1][col + 1].color != color)
+                        {
+                            firstMove = true;
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can not take the same color piece");
+                            valid = false;
+                        }
+
                     }
                 }
-                else if (row + 1 == nextRow && col - 1 == nextCol)
+                else if (southWestTake)
                 {
-                    if (gameBoard[row - 1][col + 1].color != color)
+                    if (gameBoard[row + 1][col - 1] == null)
                     {
-                        valid = true;
+                        valid = false;
+                        Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
-                        Console.WriteLine("You can not take the same color piece");
-                        valid = false;
+                        if (gameBoard[row + 1][col - 1].color != color)
+                        {
+                            firstMove = true;
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can not take the same color piece");
+                            valid = false;
+                        }
+
                     }
                 }
                 else
@@ -162,10 +215,7 @@ namespace Chess.MVC.Model
                     valid = false;
                 }
             }
-            if (valid == true && firstMove == false)
-            {
-                firstMove = true;
-            }
+
             return valid;
         }
 

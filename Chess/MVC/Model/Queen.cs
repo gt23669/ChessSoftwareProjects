@@ -48,156 +48,378 @@ namespace Chess.MVC.Model
 
 
             int index = 1;
-            bool exit = false;
+            int i = 1;
+            bool exit;
+            bool north;
+            bool northEast;
+            bool northWest;
+            bool east;
+            bool south;
+            bool southEast;
+            bool southWest;
+            bool west;
             do
             {
+                exit = false;
+                north = row - index == nextRow && col == nextCol;
+                northEast = row - index == nextRow && col + index == nextCol;
+                northWest = row - index == nextRow && col - index == nextCol;
+                east = row == nextRow && col + index == nextCol;
+                south = row + index == nextRow && col == nextCol;
+                southEast = row + index == nextRow && col + index == nextCol;
+                southWest = row + index == nextRow && col - index == nextCol;
+                west = row == nextRow && col - index == nextCol;
 
-                if ((row - index == nextRow && col == nextCol) || (row + index == nextRow && col == nextCol))
+                if ((north) || (south))
                 {
-                    if (gameBoard[nextRow][nextCol] != null)
-                    {
-                        if (gameBoard[nextRow][nextCol].color == this.color)
-                        {
-                            Console.WriteLine("You can not move to a space occupied by the same colorS");
-                            valid = false;
-                            exit = true;
-                        }
-                        else
-                        {
-                            valid = true;
-                            exit = true;
-                        }
-                    }
-                    else
-                    {
-                        valid = true;
-                        exit = true;
-                    }
-                }
-                else if ((row == nextRow && col + index == nextCol) || (row == nextRow && col - index == nextCol))
-                {
-                    bool temp = false;
-                    int c = 1;
-
-                    if (row == nextRow && col + index == nextCol)
+                    if (north)
                     {
                         do
                         {
-                            if (gameBoard[row][col + c] == null)
+                            if (gameBoard[row - i][col] == null)
                             {
                                 valid = true;
-                                temp = true;
-                                exit = true;
                             }
                             else
                             {
-                                valid = false;
-                                temp = true;
-                                exit = true;
-                            }
-                        } while (!temp);
-
-                    }
-                    else
-                    {
-                        do
-                        {
-                            if (gameBoard[row][col - c] == null)
-                            {
-                                if (row == nextRow && col - c == nextCol)
+                                if (row - i == nextRow && col == nextCol)
                                 {
-                                    valid = true;
-                                    temp = true;
-                                    exit = true;
-
-                                }
-                            }
-                            else
-                            {
-                                if (row == nextRow && col - c == nextCol)
-                                {
-                                    if (gameBoard[nextRow][nextCol].color == this.color)
+                                    if (gameBoard[row - i][col].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move your piece to a space occupied by the same color");
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
                                         valid = false;
-                                        temp = true;
                                         exit = true;
                                     }
                                     else
                                     {
                                         valid = true;
-                                        temp = true;
                                         exit = true;
                                     }
                                 }
                                 else
                                 {
+                                    Console.WriteLine("This is not a valid move");
                                     valid = false;
-                                    temp = true;
                                     exit = true;
-                                    Console.WriteLine("This move is not valid");
-
                                 }
                             }
-                            c++;
-                        } while (!temp);
-                    }
-                }
-                else if ((row - index == nextRow && col + index == nextCol) || (row + index == nextRow && col + index == nextCol))
-                {
-                    if (gameBoard[nextRow][nextCol] != null)
-                    {
-                        if (gameBoard[nextRow][nextCol].color == this.color)
-                        {
-                            Console.WriteLine("You can not move to a space occupied by the same colorS");
-                            valid = false;
-                            exit = true;
-                        }
-                        else
-                        {
-                            valid = true;
-                            exit = true;
-                        }
+                            if (row - i == nextRow && col == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
                     }
                     else
                     {
-                        valid = true;
-                        exit = true;
+                        do
+                        {
+                            if (gameBoard[row + i][col] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row + i == nextRow && col == nextCol)
+                                {
+                                    if (gameBoard[row + i][col].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row + i == nextRow && col == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
                     }
                 }
-                else if ((row - index == nextRow && col - index == nextCol) || (row + index == nextRow && col - index == nextCol))
+                else if ((east) || (west))
                 {
-                    if (gameBoard[nextRow][nextCol] != null)
+                    if (east)
                     {
-                        if (gameBoard[nextRow][nextCol].color == this.color)
+                        do
                         {
-                            Console.WriteLine("You can not move to a space occupied by the same colorS");
-                            valid = false;
-                            exit = true;
-                        }
-                        else
-                        {
-                            valid = true;
-                            exit = true;
-                        }
+                            if (gameBoard[row][col + i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row == nextRow && col + i == nextCol)
+                                {
+                                    if (gameBoard[row][col + i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row == nextRow && col + i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
                     }
                     else
                     {
-                        valid = true;
-                        exit = true;
+
+                        do
+                        {
+                            if (gameBoard[row][col - i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row == nextRow && col - i == nextCol)
+                                {
+                                    if (gameBoard[row][col - i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row == nextRow && col - i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
                     }
+                }
+                else if ((northEast) || (southEast))
+                {
+                    if (northEast)
+                    {
+                        do
+                        {
+                            if (gameBoard[row - i][col + i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row - i == nextRow && col + i == nextCol)
+                                {
+                                    if (gameBoard[row - i][col + i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row - i == nextRow && col + i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            if (gameBoard[row + i][col + i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row + i == nextRow && col + i == nextCol)
+                                {
+                                    if (gameBoard[row + i][col + i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row + i == nextRow && col + i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
+                    }
+                }
+                else if ((northWest) || (southWest))
+                {
+                    if (northWest)
+                    {
+                        do
+                        {
+                            if (gameBoard[row - i][col - i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row - i == nextRow && col - i == nextCol)
+                                {
+                                    if (gameBoard[row - i][col - i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row - i == nextRow && col - i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            if (gameBoard[row + i][col - i] == null)
+                            {
+                                valid = true;
+                            }
+                            else
+                            {
+                                if (row + i == nextRow && col - i == nextCol)
+                                {
+                                    if (gameBoard[row + i][col - i].color == this.color)
+                                    {
+                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        valid = false;
+                                        exit = true;
+                                    }
+                                    else
+                                    {
+                                        valid = true;
+                                        exit = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This is not a valid move");
+                                    valid = false;
+                                    exit = true;
+                                }
+                            }
+                            if (row + i == nextRow && col - i == nextCol)
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        } while (!exit);
+                    }
+                }
+                if (index < 8)
+                {
+                    index++;
                 }
                 else
                 {
-                    if (index < 7)
-                    {
-                        index++;
-                    }
-                    else
-                    {
-                        valid = false;
-                        exit = true;
-                    }
+                    Console.WriteLine("This move is not valid");
+                    exit = true;
+                    valid = false;
                 }
 
             } while (!exit);

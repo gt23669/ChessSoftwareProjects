@@ -10,12 +10,14 @@ namespace Chess.MVC.Model
     {
         public Player2()
         {
+            name = "Player2";
             color = "Dark";
             isTurn = false;
             isInCheck = false;
             isInCheckMate = false;
-            moveNumber = 1;
+            moveIndex = 0;
             piecesTaken = new List<Piece>();
+            moves = new List<string>();
         }
 
         public override StringBuilder ToString()
