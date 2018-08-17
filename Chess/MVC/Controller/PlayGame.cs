@@ -22,7 +22,7 @@ namespace Chess.MVC.Controller
             Console.WriteLine("Which file will you use?");
             choiceFile = CIO.PromptForMenuSelection(args, false);
             file = args[choiceFile - 1];
-            playerMovments = GameSetup.readInPieces(file);
+            
             bool exit = false;
             do
             {
