@@ -8,12 +8,14 @@ namespace Chess.MVC.Model
 {
     abstract class Person
     {
-       public string color;
-       public bool isTurn;
-       public bool isInCheck;
-       public bool isInCheckMate;
-       public List<Piece> piecesTaken;
-        public int moveNumber;
+        public string name;
+        public string color;
+        public bool isTurn;
+        public bool isInCheck;
+        public bool isInCheckMate;
+        public List<Piece> piecesTaken;
+        public int moveIndex;
+        public List<string> moves;
 
 
         public abstract StringBuilder ToString();

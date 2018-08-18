@@ -14,201 +14,239 @@ namespace Chess.MVC.Controller
     {
         static Board board = new Board();
         static Piece[][] gameBoard = new Piece[8][];
-        static List<Piece> pieces = new List<Piece>();
-        internal static void Menu(string[] args)
+        static List<Piece> pieces;
+        static King LKing;
+        static King DKing;
+
+
+
+        internal static void SetupGame(string[] args)
         {
-            bool exit = false;
-            do
-            {
-
-                string[] options = new string[] { "Setup Board", "Move" };
-                int choiceOption;
-                choiceOption = CIO.PromptForMenuSelection(options, true);
-                int choiceFile;
-                string file;
-
-
-                switch (choiceOption)
-                {
-                    case 1:
-                        Console.WriteLine("Which file will you use?");
-                        choiceFile = CIO.PromptForMenuSelection(args, false);
-                        file = args[choiceFile - 1];
-                        gameBoard = board.GenerateBoard();
-                        setupBoard(file);
-                        board.fillBoard(pieces);
-                        board.printNewBoard(gameBoard);
-                        break;
-                    case 2:
-                        Console.WriteLine("Which file will you use?");
-                        choiceFile = CIO.PromptForMenuSelection(args, false);
-                        file = args[choiceFile - 1];
-                        string[] pieceMovments = readInPieces(file);
-                        move(pieceMovments);
-                        break;
-                    case 0:
-                        exit = !exit;
-                        break;
-                }
-            } while (!exit);
+            gameBoard = board.GenerateBoard();
+            setupBoard(args);
+            board.FillBoard(pieces, gameBoard);
+            board.printNewBoard(gameBoard);
         }
 
-        private static void setupBoard(string args)
+        private static void setupBoard(string[] allArgs)
         {
-
-            string content = File.ReadAllText(args);
-            content = content.ToUpper();
-            string[] SplitArray = Regex.Split(content, "[\r\n]+");
-            for (int i = 0; i < SplitArray.Length; i++)
+            pieces = new List<Piece>();
+            List<string> args = new List<string>();
+            for (int i = 0; i < allArgs.Length; i++)
             {
-                char type = SplitArray[i][0]; //Piece type
-                char color = SplitArray[i][1];//Color               
-                int y = 0; //YLocation
-                int x = 0; //XLocation
-                string tempY;
-                if (SplitArray[i][0] == 'K')
+                if (allArgs[i].Contains("Default"))
                 {
-                    if (SplitArray[i][0 + 1] == 'N')
-                    {
-                        color = SplitArray[i][2];
-                        tempY = SplitArray[i][3].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][4]);
-                        Piece knight = new Knight(color, x, y);
-                        if (knight.color == 'D')
-                        {
-                            knight.ID = knight.ID.ToLower();
-                        }
-                        pieces.Add(knight);
-                        continue;
-
-                    }
-                }
-
-                switch (SplitArray[i][0])
-                {
-
-                    case 'B':
-                        color = SplitArray[i][1];
-                        tempY = SplitArray[i][2].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][3]);
-                        Piece bishop = new Bishop(color, x, y);
-                        if (bishop.color == 'D')
-                        {
-                            bishop.ID = bishop.ID.ToLower();
-                        }
-                        pieces.Add(bishop);
-                        break;
-                    case 'K':
-                        color = SplitArray[i][1];
-                        tempY = SplitArray[i][2].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][3]);
-                        Piece king = new King(color, x, y);
-                        if (king.color == 'D')
-                        {
-                            king.ID = king.ID.ToLower();
-                        }
-                        pieces.Add(king);
-                        break;
-                    case 'P':
-                        color = SplitArray[i][1];
-                        tempY = SplitArray[i][2].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][3]);
-                        Piece pawn = new Pawn(color, x, y);
-                        if (pawn.color == 'D')
-                        {
-                            pawn.ID = pawn.ID.ToLower();
-                        }
-                        pieces.Add(pawn);
-                        break;
-                    case 'Q':
-                        color = SplitArray[i][1];
-                        tempY = SplitArray[i][2].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][3]);
-                        Piece queen = new Queen(color, x, y);
-                        if (queen.color == 'D')
-                        {
-                            queen.ID = queen.ID.ToLower();
-                        }
-                        pieces.Add(queen);
-                        break;
-                    case 'R':
-                        color = SplitArray[i][1];
-                        tempY = SplitArray[i][2].ToString();
-                        int.TryParse(tempY, out y);
-                        x = convertX(SplitArray[i][3]);
-                        Piece rook = new Rook(color, x, y);
-                        if (rook.color == 'D')
-                        {
-                            rook.ID = rook.ID.ToLower();
-                        }
-                        pieces.Add(rook);
-                        break;
+                    args.Add(allArgs[i]);
                 }
 
             }
 
-        }
+            Console.WriteLine("Which file are you using?");
+            string[] options = args.ToArray();
+            int selection = CIO.PromptForMenuSelection(options, false);
 
+            string fileContent;
+            fileContent = File.ReadAllText(options[selection - 1]);
+            fileContent = fileContent.ToUpper();
 
-        public static void move(string[] SplitArray)
-        {
-            bool valid = true;
+            string[] SplitArray = Regex.Split(fileContent, "[\r\n]+");
 
-
-
-            for (int i = PlayGame.MoveNumber(); i < SplitArray.Length; i++)
+            for (int i = 0; i < SplitArray.Length; i++)
             {
-                //Piece MovedPiece = null;
-
-                int currentCol = convertX(SplitArray[i][0]);
-                int currentRow;
-                int.TryParse(SplitArray[i][1].ToString(), out currentRow);
-                int nextCol = convertX(SplitArray[i][2]);
-                int NextRow;
-                int.TryParse(SplitArray[i][3].ToString(), out NextRow);
-                //Console.WriteLine($"count = {i}");
-                if (SplitArray[i] == "" || currentRow > 7 || currentCol > 7 || nextCol > 7 || NextRow > 7)
+                pieces.Add(CreatePiece(SplitArray[i]));
+                if (pieces[i].GetType().Name == "King")
                 {
-                    continue;
-                }
-                else
-                {
-                    if (gameBoard[currentRow][currentCol] != null)
+                    if (pieces[i].color == 'L')
                     {
-                        if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
-                        {
-                            Console.WriteLine();
-                            board.printNewBoard(gameBoard);
-                            //Piece temp = gameBoard[currentRow][currentCol];
-                            gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
-                            gameBoard[currentRow][currentCol] = null;
-                            gameBoard[NextRow][nextCol].row = NextRow;
-                            gameBoard[NextRow][nextCol].col = nextCol;
-
-                            PlayGame.turnFlip(i);
-                            
-                        }
-
+                        LKing = (King)pieces[i];
                     }
                     else
                     {
-                        valid = false;
-                        Console.WriteLine("There is no piece to move");
+                        DKing = (King)pieces[i];
+                    }
+                }
+            }
+
+        }
+
+        internal static void moveTest(string[] args)
+        {
+            string[] pieceMovments = readInPieces(args);
+            movePiecesTest(pieceMovments);
+        }
+
+        private static void movePiecesTest(string[] pieceMovments)
+        {
+            for (int i = 0; i < pieceMovments.Length; i++)
+            {
+                int currentCol = convertX(pieceMovments[i][0]);
+                int.TryParse(pieceMovments[i][1].ToString(), out int currentRow);
+                int nextCol = convertX(pieceMovments[i][2]);
+                int.TryParse(pieceMovments[i][3].ToString(), out int NextRow);
+
+
+                if (gameBoard[currentRow][currentCol] != null)
+                {
+                    //Console.WriteLine($"Attempting to move {gameBoard[currentRow][currentCol].color} {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} to col:{nextCol} row:{NextRow} ");
+                    if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
+                    {
+                        Console.WriteLine($"{gameBoard[currentRow][currentCol].color} {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} moved to col:{nextCol} row:{NextRow} ");
+                        gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
+                        gameBoard[currentRow][currentCol] = null;
+                        gameBoard[NextRow][nextCol].row = NextRow;
+                        gameBoard[NextRow][nextCol].col = nextCol;
+                        Console.WriteLine();
+                        board.printNewBoard(gameBoard);
+                        Console.WriteLine($"Light King in check: {LKing.detectCheck(gameBoard)}\nDark King in check: {DKing.detectCheck(gameBoard)}");
                     }
 
+                }
+                else
+                {
+
+                    Console.WriteLine("There is no piece to move");
                 }
 
 
             }
             Console.WriteLine();
             board.printNewBoard(gameBoard);
+        }
+
+
+
+
+        public static string[] readInPieces(string[] allArgs)
+        {
+            List<string> argList = new List<string>();
+            for (int i = 0; i < allArgs.Length; i++)
+            {
+                if (allArgs[i].Contains("Move"))
+                {
+                    argList.Add(allArgs[i]);
+                }
+            }
+            Console.WriteLine("Which test file are you using?");
+            int choice = CIO.PromptForMenuSelection(argList.ToArray(), false);
+
+            string content = File.ReadAllText(argList[choice - 1]);
+            content = content.ToUpper();
+
+            string[] SplitArray = Regex.Split(content, "[\r\n]+");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < SplitArray.Length; i++)
+            {
+
+                if (SplitArray[i].Length == 11)
+                {
+                    string x = SplitArray[i].Substring(0, 5);
+                    string y = SplitArray[i].Substring(6, 5);
+                    string[] doubleString = new string[] { x, y };
+                    for (int j = 0; j < 2; j++)
+                    {
+                        int.TryParse(doubleString[i][1].ToString(), out int temp1);
+                        int.TryParse(doubleString[i][4].ToString(), out int temp4);
+                        if (doubleString[i][1] < 8 && doubleString[i][4] < 8)
+                        {
+
+                            if ((doubleString[j][0] != 'I') && (doubleString[j][3] != 'I'))
+                            {
+                                temp.Add(doubleString[j]);
+                            }
+                        }
+
+                    }
+
+
+                }
+                else
+                {
+                    int.TryParse(SplitArray[i][1].ToString(), out int temp1);
+                    int.TryParse(SplitArray[i][4].ToString(), out int temp4);
+                    if (temp1 < 8 && temp4 < 8)
+                    {
+
+                        if ((SplitArray[i][0] != 'I') && (SplitArray[i][3] != 'I'))
+                        {
+                            temp.Add(SplitArray[i]);
+                        }
+                    }
+
+                }
+            }
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                temp[i] = temp[i].Replace(" ", "");
+            }
+
+
+            SplitArray = temp.ToArray();
+            return SplitArray;
+
 
         }
+
+
+        public static Piece CreatePiece(string stringPiece)
+        {
+            for (int i = 0; i < stringPiece.Length; i++)
+            {
+
+                char type = stringPiece[0];
+                char color = stringPiece[1];
+                int col = convertX(stringPiece[2]);
+                int.TryParse(stringPiece[3].ToString(), out int row);
+                switch (type)
+                {
+                    case 'P':
+                        Piece Pawn = new Pawn(color, col, row);
+                        if (color == 'D')
+                        {
+                            Pawn.ID = Pawn.ID.ToLower();
+                        }
+                        return Pawn;
+                    case 'R':
+                        Piece Rook = new Rook(color, col, row);
+                        if (color == 'D')
+                        {
+                            Rook.ID = Rook.ID.ToLower();
+                        }
+                        return Rook;
+                    case 'N':
+                        Piece Knight = new Knight(color, col, row);
+                        if (color == 'D')
+                        {
+                            Knight.ID = Knight.ID.ToLower();
+                        }
+                        return Knight;
+                    case 'B':
+                        Piece Bishop = new Bishop(color, col, row);
+                        if (color == 'D')
+                        {
+                            Bishop.ID = Bishop.ID.ToLower();
+                        }
+                        return Bishop;
+                    case 'K':
+                        Piece King = new King(color, col, row);
+                        if (color == 'D')
+                        {
+                            King.ID = King.ID.ToLower();
+                        }
+                        return King;
+                    case 'Q':
+                        Piece Queen = new Queen(color, col, row);
+                        if (color == 'D')
+                        {
+                            Queen.ID = Queen.ID.ToLower();
+                        }
+                        return Queen;
+
+                }
+            }
+            return null;
+        }
+
         public static int convertX(char tempX)
         {
             int x = 0;
@@ -250,61 +288,14 @@ namespace Chess.MVC.Controller
             return x;
         }
 
-
-        public static string[] readInPieces(string args)
+        public static Piece[][] getGameBoard()
         {
-
-            string content = File.ReadAllText(args);
-            content = content.ToUpper();
-
-            string[] SplitArray = Regex.Split(content, "[\r\n]+");
-            List<string> temp = new List<string>();
-            for (int i = 0; i < SplitArray.Length; i++)
-            {
-                if (SplitArray[i].Length == 11)
-                {
-                    string x = SplitArray[i].Substring(0, 5);
-                    string y = SplitArray[i].Substring(6, 5);
-                    string[] doubleString = new string[] { x, y };
-                    for (int j = 0; j < 2; j++)
-                    {
-                        if ((doubleString[j][0] != 'I') && (doubleString[j][3] != 'I'))
-                        {
-                            temp.Add(doubleString[j]);
-                        }
-
-                    }
-
-
-                }
-                else
-                {
-                    if ((SplitArray[i][0] != 'I') && (SplitArray[i][3] != 'I'))
-                    {
-                        temp.Add(SplitArray[i]);
-                    }
-
-                }
-            }
-
-            for (int i = 0; i < temp.Count; i++)
-            {
-                temp[i] = temp[i].Replace(" ", "");
-            }
-
-
-            SplitArray = temp.ToArray();
-            return SplitArray;
-
-
+            return gameBoard;
         }
-
-
-
-
+        public static void printBoard(Piece[][] gameBoard)
+        {
+            board.printNewBoard(gameBoard);
+        }
 
     }
 }
-
-
-

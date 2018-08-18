@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Chess.MVC.Model
 {
     abstract class Piece
-    { 
+    {
         public string name;
         public string ID;
         public char color;

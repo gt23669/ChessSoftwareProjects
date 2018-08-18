@@ -12,7 +12,7 @@ namespace Chess.MVC.Model
         //char color;
         //int xLoc;
         //int yLoc;
-
+        bool isInCheck = false;
         public King(char color, int col, int row)
         {
             base.name = "King";
@@ -47,110 +47,747 @@ namespace Chess.MVC.Model
                 return false;
             }
 
-            int index = 1;
+
+            bool north = row - 1 == nextRow && col == nextCol;
+            bool northEast = row - 1 == nextRow && col + 1 == nextCol;
+            bool northWest = row - 1 == nextRow && col - 1 == nextCol;
+            bool east = row == nextRow && col + 1 == nextCol;
+            bool south = row + 1 == nextRow && col == nextCol;
+            bool southEast = row + 1 == nextRow && col + 1 == nextCol;
+            bool southWest = row + 1 == nextRow && col - 1 == nextCol;
+            bool west = row == nextRow && col - 1 == nextCol;
 
 
-            if ((row - index == nextRow && col == nextCol) || row + index == nextRow && col == nextCol)
+
+
+            if ((north) || (south))
             {
-                if (gameBoard[nextRow][nextCol] != null)
+                if (north)
                 {
-                    if (gameBoard[nextRow][nextCol].color == this.color)
+                    if (gameBoard[row - 1][col] == null)
                     {
-                        Console.WriteLine("You can not move in a space occupied by the same color");
-                        valid = false;
+                        valid = true;
                     }
                     else
                     {
-                        valid = true;
+                        if (gameBoard[row - 1][col].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                 }
                 else
                 {
-                    valid = true;
+                    if (gameBoard[row + 1][col] == null)
+                    {
+                        valid = true;
+                    }
+                    else
+                    {
+                        if (gameBoard[row + 1][col].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    }
                 }
             }
-            else if ((row == nextRow && col + index == nextCol) || (row == nextRow && col - index == nextCol))
+            else if ((east) || (west))
             {
-                if (gameBoard[nextRow][nextCol] != null)
+                if (east)
                 {
-                    if (gameBoard[nextRow][nextCol].color == this.color)
+                    if (gameBoard[row][col + 1] == null)
                     {
-                        Console.WriteLine("You can not move in a space occupied by the same color");
-                        valid = false;
-
+                        valid = true;
                     }
                     else
                     {
-                        valid = true;
-
+                        if (gameBoard[row][col + 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                 }
                 else
                 {
-                    valid = true;
-
+                    if (gameBoard[row][col - 1] == null)
+                    {
+                        valid = true;
+                    }
+                    else
+                    {
+                        if (gameBoard[row][col - 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    }
                 }
             }
-            else if ((row - index == nextRow && col + index == nextCol) || (row + index == nextRow && col + index == nextCol))
+            else if ((northEast) || (southEast))
             {
-                if (gameBoard[nextRow][nextCol] != null)
+                if (northEast)
                 {
-                    if (gameBoard[nextRow][nextCol].color == this.color)
+                    if (gameBoard[row - 1][col + 1] == null)
                     {
-                        Console.WriteLine("You can not move in a space occupied by the same color");
-                        valid = false;
-
+                        valid = true;
                     }
                     else
                     {
-                        valid = true;
-
+                        if (gameBoard[row - 1][col + 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                 }
                 else
                 {
-                    valid = true;
-
+                    if (gameBoard[row + 1][col + 1] == null)
+                    {
+                        valid = true;
+                    }
+                    else
+                    {
+                        if (gameBoard[row + 1][col + 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    }
                 }
             }
-            else if ((row - index == nextRow && col - index == nextCol) || (row + index == nextRow && col - index == nextCol))
+            else if ((northWest) || (southWest))
             {
-                if (gameBoard[nextRow][nextCol] != null)
+                if (northWest)
                 {
-                    if (gameBoard[nextRow][nextCol].color == this.color)
+                    if (gameBoard[row - 1][col - 1] == null)
                     {
-                        Console.WriteLine("You can not move in a space occupied by the same color");
-                        valid = false;
-
+                        valid = true;
                     }
                     else
                     {
-                        valid = true;
-
+                        if (gameBoard[row - 1][col - 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                 }
                 else
                 {
-                    valid = true;
-
+                    if (gameBoard[row + 1][col - 1] == null)
+                    {
+                        valid = true;
+                    }
+                    else
+                    {
+                        if (gameBoard[row + 1][col - 1].color == this.color)
+                        {
+                            Console.WriteLine("You can not move to a space occupied by the same color");
+                            valid = false;
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    }
                 }
             }
             else
             {
-                Console.WriteLine("This move is not legal");
+                Console.WriteLine("This move is not valid");
                 valid = false;
-
             }
 
 
 
-
-
-
-
-
-
             return valid;
+        }
+
+        internal bool detectCheck(Piece[][] gameBoard)
+        {
+            bool north;
+            bool northEast;
+            bool northWest;
+            bool east;
+            bool south;
+            bool southEast;
+            bool southWest;
+            bool west;
+            bool northEastRowKnight;
+            bool northEastColKnight;
+            bool southEastRowKnight;
+            bool southEastColKnight;
+            bool southWestRowKnight;
+            bool southWestColKnight;
+            bool northWestRowKnight;
+            bool northWestColKnight;
+
+            for (int i = 1; i < 8; i++)
+            {
+                north = row - i >= 0 && col == col;//qkr
+                northEast = row - i >= 0 && col + i <= 7;//qkpb
+                northWest = row - i >= 0 && col - i >= 0;//qkpb
+                east = row == row && col + i <= 7;//qkr
+                south = row + i <= 7 && col == col;//qkr
+                southEast = row + i <= 7 && col + i <= 7;//qkpb
+                southWest = row + i <= 7 && col - i >= 0;//qkpb
+                west = row == row && col - i >= 0;//qkr
+                northEastRowKnight = row - 2 >= 0 && col + 1 <= 7;
+                northEastColKnight = row - 1 >= 0 && col + 2 <= 7;
+                southEastRowKnight = row + 2 <= 7 && col + 1 <= 7;
+                southEastColKnight = row + 1 <= 7 && col + 2 <= 7;
+                southWestRowKnight = row + 2 <= 7 && col - 1 >= 0;
+                southWestColKnight = row + 1 <= 7 && col - 2 >= 0;
+                northWestRowKnight = row - 2 >= 0 && col - 1 >= 0;
+                northWestColKnight = row - 1 >= 0 && col - 2 >= 0;
+                string type;
+
+                if (northEastRowKnight || northEastColKnight)
+                {
+                    //northEastRowKnight = row - 2 >= 0 && col + 1 <= 7;
+                    //northEastColKnight = row - 1 >= 0 && col + 2 <= 7;
+                    if (northEastRowKnight)
+                    {
+                        if (gameBoard[row - 2][col + 1] != null && gameBoard[row - 2][col + 1].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row - 2][col + 1].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                    else
+                    {
+                        if (gameBoard[row - 1][col + 2] != null && gameBoard[row - 1][col + 2].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row - 1][col + 2].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                }
+                else if (southEastRowKnight || southEastColKnight)
+                {
+                    //southEastRowKnight = row + 2 <= 7 && col + 1 <= 7;
+                    //southEastColKnight = row + 1 <= 7 && col + 2 <= 7;
+                    if (southEastRowKnight)
+                    {
+                        if (gameBoard[row + 2][col + 1] != null && gameBoard[row + 2][col + 1].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row + 2][col + 1].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        if (gameBoard[row + 1][col + 2] != null && gameBoard[row + 1][col + 2].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row + 1][col + 2].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else if (southWestRowKnight || southWestColKnight)
+                {
+                    //southWestRowKnight = row + 2 <= 7 && col - 1 >= 0;
+                    //southWestColKnight = row + 1 <= 7 && col - 2 >= 0;
+                    if (southWestRowKnight)
+                    {
+                        if (gameBoard[row + 2][col - 1] != null && gameBoard[row + 2][col - 1].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row + 2][col - 1].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                    else
+                    {
+                        if (gameBoard[row + 1][col - 2] != null && gameBoard[row + 1][col - 2].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row + 1][col - 2].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else if (northWestRowKnight || northWestColKnight)
+                {
+                    //northWestRowKnight = row - 2 >= 0 && col - 1 >= 0;
+                    //northWestColKnight = row - 1 >= 0 && col - 2 >= 0;
+                    if (northWestRowKnight)
+                    {
+                        if (gameBoard[row - 2][col - 1] != null && gameBoard[row - 2][col - 1].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row - 2][col - 1].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        if (gameBoard[row - 1][col - 2] != null && gameBoard[row - 1][col - 2].GetType().Name == "Knight")
+                        {
+                            if (gameBoard[row - 1][col - 2].color == this.color)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
+                                isInCheck = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else
+                {
+                    return isInCheck;
+                }
+
+                bool exit = false;
+                int index = 1;
+                List<Piece> checkPieces = new List<Piece>();
+                if (north)
+                {
+                    //north = row - i >= 0 && col == col;//qkr
+                    do
+                    {
+
+                        if (gameBoard[row - index][col] == null)
+                        {
+                            index++;
+                            if (row - index < 0)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row - index][col].GetType().Name == "Queen" && gameBoard[row - index][col].color != this.color) ||
+                                 (gameBoard[row - index][col].GetType().Name == "Rook" && gameBoard[row - index][col].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row - index][col]);
+                            }
+                            else if ((gameBoard[row - index][col].GetType().Name == "King" && gameBoard[row - index][col].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row - index][col]);
+                            }
+
+                            index++;
+                            if (row - index < 0)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (northEast)
+                {
+                    //northEast = row - i >= 0 && col + i <= 7;//qkpb
+                    do
+                    {
+
+                        if (gameBoard[row - index][col + index] == null)
+                        {
+                            index++;
+                            if (row - index < 0 || col + index > 7)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row - index][col + index].GetType().Name == "Queen" && gameBoard[row - index][col + index].color != this.color) ||
+                                 (gameBoard[row - index][col + index].GetType().Name == "Pawn" && gameBoard[row - index][col + index].color != this.color) ||
+                                 (gameBoard[row - index][col + index].GetType().Name == "Bishop" && gameBoard[row - index][col + index].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row - index][col + index]);
+                            }
+                            else if ((gameBoard[row - index][col + index].GetType().Name == "King" && gameBoard[row - index][col + index].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row - index][col + index]);
+                            }
+
+                            index++;
+                            if (row - index < 0 || col + index > 7)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+
+                }
+                else if (northWest)
+                {
+                    //northWest = row - i >= 0 && col - i >= 0;//qkpb
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row - index][col - index] == null)
+                        {
+                            index++;
+                            if (row - index < 0 || col - index < 0)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row - index][col - index].GetType().Name == "Queen" && gameBoard[row - index][col - index].color != this.color) ||
+                                 (gameBoard[row - index][col - index].GetType().Name == "Pawn" && gameBoard[row - index][col - index].color != this.color) ||
+                                 (gameBoard[row - index][col - index].GetType().Name == "Bishop" && gameBoard[row - index][col - index].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row - index][col - index]);
+                            }
+                            else if ((gameBoard[row - index][col - index].GetType().Name == "King" && gameBoard[row - index][col - index].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row - index][col - index]);
+                            }
+
+                            index++;
+                            if (row - index < 0 || col - index < 0)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (east)
+                {
+                    //east = row == row && col + i <= 7;//qkr
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row][col + index] == null)
+                        {
+                            index++;
+                            if (col + index > 7)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row][col + index].GetType().Name == "Queen" && gameBoard[row][col + index].color != this.color) ||
+                                 (gameBoard[row][col + index].GetType().Name == "Rook" && gameBoard[row][col + index].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row][col + index]);
+                            }
+                            else if ((gameBoard[row][col + index].GetType().Name == "King" && gameBoard[row][col + index].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row][col + index]);
+                            }
+
+                            index++;
+                            if (col + index > 7)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (south)
+                {
+                    //south = row + i <= 7 && col == col;//qkr
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row + index][col] == null)
+                        {
+                            index++;
+                            if (row + index > 7)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row + index][col].GetType().Name == "Queen" && gameBoard[row + index][col].color != this.color) ||
+                                 (gameBoard[row + index][col].GetType().Name == "Rook" && gameBoard[row + index][col].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row + index][col]);
+                            }
+                            else if ((gameBoard[row + index][col].GetType().Name == "King" && gameBoard[row + index][col].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row + index][col]);
+                            }
+
+                            index++;
+                            if (row + index > 7)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (southEast)
+                {
+                    //southEast = row + i <= 7 && col + i <= 7;//qkpb
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row + index][col + index] == null)
+                        {
+                            index++;
+                            if (row + index > 7 || col + index > 7)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row + index][col + index].GetType().Name == "Queen" && gameBoard[row + index][col + index].color != this.color) ||
+                                 (gameBoard[row + index][col + index].GetType().Name == "Pawn" && gameBoard[row + index][col + index].color != this.color) ||
+                                 (gameBoard[row + index][col + index].GetType().Name == "Bishop" && gameBoard[row + index][col + index].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row + index][col + index]);
+                            }
+                            else if ((gameBoard[row + index][col + index].GetType().Name == "King" && gameBoard[row + index][col + index].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row + index][col + index]);
+                            }
+
+                            index++;
+                            if (row + index > 7 || col + index > 7)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (southWest)
+                {
+                    //southWest = row + i <= 7 && col - i >= 0;//qkpb
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row + index][col] == null)
+                        {
+                            index++;
+                            if (row + index > 7)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row + index][col].GetType().Name == "Queen" && gameBoard[row + index][col].color != this.color) ||
+                                 (gameBoard[row + index][col].GetType().Name == "Pawn" && gameBoard[row + index][col].color != this.color) ||
+                                 (gameBoard[row + index][col].GetType().Name == "Bishop" && gameBoard[row + index][col].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row + index][col]);
+                            }
+                            else if ((gameBoard[row + index][col].GetType().Name == "King" && gameBoard[row + index][col].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row + index][col]);
+                            }
+
+                            index++;
+                            if (row + index > 7)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else if (west)
+                {
+                    //west = row == row && col - i >= 0;//qkr
+                    index = 1;
+                    do
+                    {
+
+                        if (gameBoard[row][col - index] == null)
+                        {
+                            index++;
+                            if (col - index < 0)
+                            {
+                                exit = true;
+                            }
+                        }
+                        else
+                        {
+                            if ((gameBoard[row][col - index].GetType().Name == "Queen" && gameBoard[row][col - index].color != this.color) ||
+                                 (gameBoard[row][col - index].GetType().Name == "Rook" && gameBoard[row][col - index].color != this.color))
+                            {
+                                checkPieces.Add(gameBoard[row][col - index]);
+                            }
+                            else if ((gameBoard[row][col - index].GetType().Name == "King" && gameBoard[row][col - index].color != this.color) && index < 2)
+                            {
+                                checkPieces.Add(gameBoard[row][col - index]);
+                            }
+
+                            index++;
+                            if (col - index < 0)
+                            {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
+                                exit = true;
+                            }
+                        }
+
+                    } while (!exit);
+                }
+                else
+                {
+                    return isInCheck;
+                }
+
+            }
+
+            return isInCheck;
         }
     }
 }

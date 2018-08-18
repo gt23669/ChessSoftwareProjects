@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVC\Controller\Game.cs" />
     <Compile Include="MVC\Controller\GameSetup.cs" />
     <Compile Include="MVC\Controller\PlayGame.cs" />
     <Compile Include="MVC\Model\Bishop.cs" />

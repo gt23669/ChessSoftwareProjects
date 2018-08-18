@@ -49,8 +49,16 @@ namespace Chess.MVC.Model
                 Console.WriteLine($"There is no piece to move");
                 return false;
             }
+            bool northEastRow = row - 2 == nextRow && col + 1 == nextCol;
+            bool northEastCol = row - 1 == nextRow && col + 2 == nextCol;
+            bool northWestRow = row - 2 == nextRow && col - 1 == nextCol;
+            bool northWestCol = row - 1 == nextRow && col - 2 == nextCol;
+            bool southEastRow = row + 2 == nextRow && col + 1 == nextCol;
+            bool southEastCol = row + 1 == nextRow && col + 2 == nextCol;
+            bool southWestRow = row + 2 == nextRow && col - 1 == nextCol;
+            bool southWestCol = row + 1 == nextRow && col - 2 == nextCol;
 
-            if ((row + 2 == nextRow && col + 1 == nextCol) || (row + 1 == nextRow && col + 2 == nextCol))
+            if ((southEastRow) || (southEastCol))
             {
                 if (gameBoard[nextRow][nextCol] != null)
                 {
@@ -70,7 +78,7 @@ namespace Chess.MVC.Model
                 }
                 return valid;
             }
-            else if ((row - 2 == nextRow && col + 1 == nextCol) || (row - 1 == nextRow && col + 2 == nextCol))
+            else if ((northEastRow) || (northEastCol))
             {
                 if (gameBoard[nextRow][nextCol] != null)
                 {
@@ -90,7 +98,7 @@ namespace Chess.MVC.Model
                 }
                 return valid;
             }
-            else if ((row - 1 == nextRow && col - 2 == nextCol) || (row - 2 == nextRow && col - 1 == nextCol))
+            else if ((northWestCol) || (northWestRow))
             {
                 if (gameBoard[nextRow][nextCol] != null)
                 {
@@ -110,7 +118,7 @@ namespace Chess.MVC.Model
                 }
                 return valid;
             }
-            else if ((row + 2 == nextRow && col - 1 == nextCol) || (row + 1 == nextRow && col - 2 == nextCol))
+            else if ((southWestRow) || (southWestCol))
             {
                 if (gameBoard[nextRow][nextCol] != null)
                 {
@@ -135,17 +143,6 @@ namespace Chess.MVC.Model
                 Console.WriteLine("This is not a legal move");
                 valid = false;
             }
-
-
-
-
-
-
-
-
-
-
-
 
             return valid;
         }

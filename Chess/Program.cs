@@ -17,9 +17,8 @@ namespace Chess
 
         static void Main(string[] args)
         {
-            GameSetup.Menu(args);
-            PlayGame.playGame(args);
-            
+            Game.PreGame(args);
+
 
         }
     }

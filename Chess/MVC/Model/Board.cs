@@ -8,42 +8,20 @@ namespace Chess.MVC.Model
 {
     class Board
     {
-
-        public Piece[][] gameBoard = new Piece[8][];
-
         public Piece[][] GenerateBoard()
         {
+            Piece[][] gameBoard = new Piece[8][];
+
             for (int i = 0; i < gameBoard.Length; i++)
             {
                 gameBoard[i] = new Piece[8];
-                //for (int j = 0; j < gameBoard[i].Length; j++)
-                //{
-                //    if (j == 33)
-                //    {
-                //        gameBoard[i][j] = "\r\n";
-                //        //Console.Write(gameBoard[i][j] = "\r\n");
-                //    }
-                //    else if (j % 4 == 0)
-                //    {
-                //        gameBoard[i][j] = "|";
-                //        //Console.Write(gameBoard[i][j] = "|");
-                //    }
-                //    else
-                //    {
-                //        gameBoard[i][j] = "_";
-                //        //Console.Write(gameBoard[i][j] = "_");
-                //    }
-
-                //}
 
             }
-
-
 
             return gameBoard;
         }
 
-        public Piece[][] fillBoard(List<Piece> pieces)
+        public Piece[][] FillBoard(List<Piece> pieces, Piece[][] gameBoard)
         {
             for (int i = 0; i < pieces.Count; i++)
             {
@@ -89,38 +67,11 @@ namespace Chess.MVC.Model
                             Console.Write($"|_{gameBoard[i][j].ToString()}_");
                         }
                     }
-                    
-                    ////if (j == 33)
-                    ////{
-                    ////    //gameBoard[i][j] = "\r\n";
-                    ////    //Console.Write(gameBoard[i][j] = "\r\n");
-                    ////}
-                    ////else if (j % 4 == 0)
-                    ////{
-                    ////    //gameBoard[i][j] = "|";
-                    ////    //Console.Write(gameBoard[i][j] = "|");
-                    ////}
-                    ////else
-                    ////{
-                    ////    //gameBoard[i][j] = "_";
-                    ////    //Console.Write(gameBoard[i][j] = "_");
-                    ////}
 
                 }
 
             }
 
-
-            //for (int i = 0; i < gameBoard.Length; i++)
-            //{
-            //    for (int j = 0; j < gameBoard[i].Length; j++)
-            //    {
-            //        Console.Write($"{gameBoard[i][j].ToString()}");
-            //    }
-            //    Console.WriteLine();
-
-            //}
-            //Console.WriteLine();
         }
     }
 }
