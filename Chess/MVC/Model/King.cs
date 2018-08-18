@@ -65,27 +65,6 @@ namespace Chess.MVC.Model
                 if (north)
                 {
                     if (gameBoard[row - 1][col] == null)
-                {
-                    if (gameBoard[row - 1][col] == null)
-                    {
-                        valid = true;
-                    }
-                    else
-                    {
-                        if (gameBoard[row - 1][col].color == this.color)
-                        {
-                            Console.WriteLine("You can not move to a space occupied by the same color");
-                            valid = false;
-                        }
-                        else
-                        {
-                            valid = true;
-                        }
-                    }
-                }
-                else
-                {
-                    if (gameBoard[row + 1][col] == null)
                     {
                         valid = true;
                     }
@@ -317,24 +296,7 @@ namespace Chess.MVC.Model
                         {
 
                         }
-                    if (northEastRowKnight)
-                    {
-                        if (gameBoard[row - 2][col + 1] == null)
-                        {
 
-                        }
-                        else
-                        {
-                            if (gameBoard[row - 2][col + 1].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-                        }
                     }
                     else
                     {
@@ -354,23 +316,7 @@ namespace Chess.MVC.Model
                         {
 
                         }
-                        if (gameBoard[row - 1][col + 2] == null)
-                        {
 
-                        }
-                        else
-                        {
-                            if (gameBoard[row - 1][col + 2].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-
-                        }
                     }
                 }
                 else if (southEastRowKnight || southEastColKnight)
@@ -413,42 +359,6 @@ namespace Chess.MVC.Model
                         else
                         {
 
-                    if (southEastRowKnight)
-                    {
-                        if (gameBoard[row + 2][col + 1] == null)
-                        {
-
-                        }
-                        else
-                        {
-                            if (gameBoard[row + 2][col + 1].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (gameBoard[row + 1][col + 2] == null)
-                        {
-
-                        }
-                        else
-                        {
-                            if (gameBoard[row + 1][col + 2].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
                         }
                     }
                 }
@@ -474,67 +384,7 @@ namespace Chess.MVC.Model
                         {
 
                         }
-                {
-                    if (southWestRowKnight)
-                    {
-                        if (gameBoard[row + 2][col - 1] == null)
-                        {
 
-                        }
-                        else
-                        {
-                            if (gameBoard[row + 2][col - 1].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row + 1][col - 2] == null)
-                        {
-
-                        }
-                        else
-                        {
-                            if (gameBoard[row + 1][col - 2].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-                        }
-                    }
-                }
-                else if (northWestRowKnight || northWestColKnight)
-                {
-                    if (northWestRowKnight)
-                    {
-                        if (gameBoard[row - 2][col - 1] == null)
-                        {
-
-                        }
-                        else
-                        {
-                            if (gameBoard[row - 2][col - 1].color == this.color)
-                            {
-
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
-                        }
                     }
                     else
                     {
@@ -565,13 +415,6 @@ namespace Chess.MVC.Model
                         if (gameBoard[row - 2][col - 1] != null && gameBoard[row - 2][col - 1].GetType().Name == "Knight")
                         {
                             if (gameBoard[row - 2][col - 1].color == this.color)
-                        if (gameBoard[row - 1][col - 2] == null)
-                        {
-
-                        }
-                        else
-                        {
-                            if (gameBoard[row - 1][col - 2].color == this.color)
                             {
 
                             }
@@ -603,10 +446,6 @@ namespace Chess.MVC.Model
                         else
                         {
 
-                        }
-                                Console.WriteLine($"{this.color} {this.name} is in Check");
-                                isInCheck = true;
-                            }
                         }
                     }
                 }
@@ -940,225 +779,6 @@ namespace Chess.MVC.Model
                         }
 
                     } while (!exit);
-                if (north)
-                {
-                    if (gameBoard[row - i][col] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row - i][col].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row - i][col].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Rook":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (northEast)
-                {
-                    if (gameBoard[row - i][col + i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row - i][col + i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row - i][col + i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Pawn":
-                                case "Bishop":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (northWest)
-                {
-                    if (gameBoard[row - i][col - i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row - i][col - i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row - i][col - i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Pawn":
-                                case "Bishop":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (east)
-                {
-                    if (gameBoard[row][col + i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row][col + i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row][col + i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Rook":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (south)
-                {
-                    if (gameBoard[row + i][col] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row + i][col].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row + i][col].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Rook":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (southEast)
-                {
-                    if (gameBoard[row + i][col + i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row + i][col + i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row + i][col + i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Pawn":
-                                case "Bishop":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (southWest)
-                {
-                    if (gameBoard[row + i][col - i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row + i][col - i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row + i][col - i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Pawn":
-                                case "Bishop":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                else if (west)
-                {
-                    if (gameBoard[row][col - i] == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (gameBoard[row][col - i].color == this.color)
-                        {
-
-                        }
-                        else
-                        {
-                            type = gameBoard[row][col - i].GetType().Name;
-                            switch (type)
-                            {
-                                case "Queen":
-                                case "King":
-                                case "Rook":
-                                    Console.WriteLine($"{this.color} {this.name} is in Check");
-                                    isInCheck = true;
-                                    break;
-                            }
-                        }
-                    }
                 }
                 else
                 {
