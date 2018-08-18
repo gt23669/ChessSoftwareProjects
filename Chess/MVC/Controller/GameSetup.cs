@@ -159,6 +159,180 @@ namespace Chess.MVC.Controller
 
 
                 }
+            }
+
+        }
+
+        internal static void moveTest(string[] args)
+        {
+            string[] pieceMovments = readInPieces(args);
+            movePiecesTest(pieceMovments);
+        }
+
+        private static void movePiecesTest(string[] pieceMovments)
+        {
+            for (int i = 0; i < pieceMovments.Length; i++)
+            {
+                int currentCol = convertX(pieceMovments[i][0]);
+                int.TryParse(pieceMovments[i][1].ToString(), out int currentRow);
+                int nextCol = convertX(pieceMovments[i][2]);
+                int.TryParse(pieceMovments[i][3].ToString(), out int NextRow);
+
+
+                if (gameBoard[currentRow][currentCol] != null)
+                {
+                    //Console.WriteLine($"Attempting to move {gameBoard[currentRow][currentCol].color} {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} to col:{nextCol} row:{NextRow} ");
+                    if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
+                    {
+                        Console.WriteLine($"{gameBoard[currentRow][currentCol].color} {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} moved to col:{nextCol} row:{NextRow} ");
+                        gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
+                        gameBoard[currentRow][currentCol] = null;
+                        gameBoard[NextRow][nextCol].row = NextRow;
+                        gameBoard[NextRow][nextCol].col = nextCol;
+                        Console.WriteLine();
+                        board.printNewBoard(gameBoard);
+                        LKing.detectCheck(gameBoard);
+                        DKing.detectCheck(gameBoard);
+
+                    }
+
+                }
+                else
+                {
+                    int.TryParse(SplitArray[i][1].ToString(), out int temp1);
+                    int.TryParse(SplitArray[i][4].ToString(), out int temp4);
+                    if (temp1 < 8 && temp4 < 8)
+                    {
+
+                        if ((SplitArray[i][0] != 'I') && (SplitArray[i][3] != 'I'))
+                        {
+                            temp.Add(SplitArray[i]);
+                        }
+                    }
+
+                    Console.WriteLine("There is no piece to move");
+                }
+            }
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                temp[i] = temp[i].Replace(" ", "");
+            }
+
+
+            }
+            Console.WriteLine();
+            board.printNewBoard(gameBoard);
+        }
+
+            SplitArray = temp.ToArray();
+            return SplitArray;
+
+
+        }
+
+
+        public static Piece CreatePiece(string stringPiece)
+        {
+            for (int i = 0; i < stringPiece.Length; i++)
+            {
+
+                char type = stringPiece[0];
+                char color = stringPiece[1];
+                int col = convertX(stringPiece[2]);
+                int.TryParse(stringPiece[3].ToString(), out int row);
+                switch (type)
+                {
+                    case 'P':
+                        Piece Pawn = new Pawn(color, col, row);
+                        if (color == 'D')
+                        {
+                            Pawn.ID = Pawn.ID.ToLower();
+                        }
+                        return Pawn;
+                    case 'R':
+                        Piece Rook = new Rook(color, col, row);
+                        if (color == 'D')
+                        {
+                            Rook.ID = Rook.ID.ToLower();
+                        }
+                        return Rook;
+                    case 'N':
+                        Piece Knight = new Knight(color, col, row);
+                        if (color == 'D')
+                        {
+                            Knight.ID = Knight.ID.ToLower();
+                        }
+                        return Knight;
+                    case 'B':
+                        Piece Bishop = new Bishop(color, col, row);
+                        if (color == 'D')
+                        {
+                            Bishop.ID = Bishop.ID.ToLower();
+                        }
+                        return Bishop;
+                    case 'K':
+                        Piece King = new King(color, col, row);
+                        if (color == 'D')
+                        {
+                            King.ID = King.ID.ToLower();
+                        }
+                        return King;
+                    case 'Q':
+                        Piece Queen = new Queen(color, col, row);
+                        if (color == 'D')
+                        {
+                            Queen.ID = Queen.ID.ToLower();
+                        }
+                        return Queen;
+
+                }
+            }
+
+
+        public static string[] readInPieces(string[] allArgs)
+        {
+            List<string> argList = new List<string>();
+            for (int i = 0; i < allArgs.Length; i++)
+            {
+                if (allArgs[i].Contains("Move"))
+                {
+                    argList.Add(allArgs[i]);
+                }
+            }
+            Console.WriteLine("Which test file are you using?");
+            int choice = CIO.PromptForMenuSelection(argList.ToArray(), false);
+
+            string content = File.ReadAllText(argList[choice - 1]);
+            content = content.ToUpper();
+
+            string[] SplitArray = Regex.Split(content, "[\r\n]+");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < SplitArray.Length; i++)
+            {
+
+                if (SplitArray[i].Length == 11)
+                {
+                    string x = SplitArray[i].Substring(0, 5);
+                    string y = SplitArray[i].Substring(6, 5);
+                    string[] doubleString = new string[] { x, y };
+                    for (int j = 0; j < 2; j++)
+                    {
+                        int.TryParse(doubleString[i][1].ToString(), out int temp1);
+                        int.TryParse(doubleString[i][4].ToString(), out int temp4);
+                        if (doubleString[i][1] < 8 && doubleString[i][4] < 8)
+                        {
+
+                            if ((doubleString[j][0] != 'I') && (doubleString[j][3] != 'I'))
+                            {
+                                temp.Add(doubleString[j]);
+                            }
+                        }
+
+                    }
+
+
+                }
                 else
                 {
                     int.TryParse(SplitArray[i][1].ToString(), out int temp1);
@@ -195,8 +369,8 @@ namespace Chess.MVC.Controller
 
                 char type = stringPiece[0];
                 char color = stringPiece[1];
-                int col = convertX(stringPiece[2]);
-                int.TryParse(stringPiece[3].ToString(), out int row);
+                int.TryParse(stringPiece[2].ToString(), out int row);
+                int col = convertX(stringPiece[3]);
                 switch (type)
                 {
                     case 'P':

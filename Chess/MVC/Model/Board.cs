@@ -8,6 +8,9 @@ namespace Chess.MVC.Model
 {
     class Board
     {
+
+
+
         public Piece[][] GenerateBoard()
         {
             Piece[][] gameBoard = new Piece[8][];
