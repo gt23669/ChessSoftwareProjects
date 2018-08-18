@@ -97,7 +97,8 @@ namespace Chess.MVC.Controller
                         gameBoard[NextRow][nextCol].col = nextCol;
                         Console.WriteLine();
                         board.printNewBoard(gameBoard);
-                        Console.WriteLine($"Light King in check: {LKing.detectCheck(gameBoard)}\nDark King in check: {DKing.detectCheck(gameBoard)}");
+                        Console.WriteLine($"Light King in check: {LKing.detectCheck(gameBoard)}" +
+                            $"\nDark King in check: {DKing.detectCheck(gameBoard)}");
                     }
 
                 }

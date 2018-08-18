@@ -66,7 +66,17 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row - 1][col] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+
                     }
                     else
                     {
@@ -77,7 +87,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -85,7 +104,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row + 1][col] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -96,7 +124,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -107,7 +144,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row][col + 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -118,7 +164,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -126,7 +181,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row][col - 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -137,7 +201,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -148,7 +221,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row - 1][col + 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -159,7 +241,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -167,7 +258,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row + 1][col + 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -178,7 +278,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -189,7 +298,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row - 1][col - 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -200,7 +318,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -208,7 +335,16 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row + 1][col - 1] == null)
                     {
-                        valid = true;
+                        if (detectCheck(gameBoard))
+                        {
+                            Console.WriteLine($"You can not place the {color} {name} in check");
+                            valid = false;
+
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
                     }
                     else
                     {
@@ -219,7 +355,16 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            valid = true;
+                            if (detectCheck(gameBoard))
+                            {
+                                Console.WriteLine($"You can not place the {color} {name} in check");
+                                valid = false;
+
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
                         }
                     }
                 }
@@ -253,6 +398,10 @@ namespace Chess.MVC.Model
             bool southWestColKnight;
             bool northWestRowKnight;
             bool northWestColKnight;
+
+            bool exit = false;
+            int index = 1;
+            List<Piece> checkPieces = new List<Piece>();
 
             for (int i = 1; i < 8; i++)
             {
@@ -400,10 +549,7 @@ namespace Chess.MVC.Model
                                 isInCheck = true;
                             }
                         }
-                        else
-                        {
-
-                        }
+                        
                     }
                 }
                 else if (northWestRowKnight || northWestColKnight)
@@ -454,11 +600,10 @@ namespace Chess.MVC.Model
                     return isInCheck;
                 }
 
-                bool exit = false;
-                int index = 1;
-                List<Piece> checkPieces = new List<Piece>();
+
                 if (north)
                 {
+                    index = 1;
                     //north = row - i >= 0 && col == col;//qkr
                     do
                     {
@@ -468,6 +613,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row - index < 0)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -498,6 +647,7 @@ namespace Chess.MVC.Model
                 }
                 else if (northEast)
                 {
+                    index = 1;
                     //northEast = row - i >= 0 && col + i <= 7;//qkpb
                     do
                     {
@@ -507,6 +657,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row - index < 0 || col + index > 7)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -549,6 +703,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row - index < 0 || col - index < 0)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -590,6 +748,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (col + index > 7)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -630,6 +792,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -670,6 +836,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7 || col + index > 7)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -711,6 +881,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -752,6 +926,10 @@ namespace Chess.MVC.Model
                             index++;
                             if (col - index < 0)
                             {
+                                if (checkPieces.Count > 0)
+                                {
+                                    isInCheck = true;
+                                }
                                 exit = true;
                             }
                         }
@@ -778,7 +956,7 @@ namespace Chess.MVC.Model
                             }
                         }
 
-                    } while (!exit);
+                    } while (!exit && checkPieces.Count == 0);
                 }
                 else
                 {
