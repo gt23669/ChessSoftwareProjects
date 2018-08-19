@@ -13,6 +13,7 @@ namespace Chess.MVC.Model
         //int xLoc;
         //int yLoc;
         bool isInCheck = false;
+        bool isInCheckMate = false;
         public King(char color, int col, int row)
         {
             base.name = "King";
@@ -380,6 +381,126 @@ namespace Chess.MVC.Model
             return valid;
         }
 
+        internal bool detectCheckMate(Piece[][] gameBoard)
+        {
+            List<string> availableMoves = new List<string>();
+            bool north = row - 1 >= 0 && col == col;
+            bool south = row + 1 <= 7 && col == col;
+            bool east = row == row && col + 1 <= 7;
+            bool west = row == row && col - 1 >= 0;
+            bool northEast = row - 1 >= 0 && col + 1 <= 7;
+            bool southEast = row + 1 <= 7 && col + 1 <= 7;
+            bool northWest = row - 1 >= 0 && col - 1 >= 0;
+            bool southWest = row + 1 <= 7 && col - 1 >= 0;
+            if (north)
+            {
+                if (Check(gameBoard, row - 1, col))
+                {
+                    availableMoves.Add($"{(row - 1).ToString()},{col}");
+
+                }
+                else
+                {
+
+                }
+
+            }
+            if (south)
+            {
+                if (Check(gameBoard, row + 1, col))
+                {
+                    availableMoves.Add($"{(row + 1).ToString()},{col}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (east)
+            {
+                if (Check(gameBoard, row, col + 1))
+                {
+                    availableMoves.Add($"{(row).ToString()},{col + 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (west)
+            {
+                if (Check(gameBoard, row, col - 1))
+                {
+                    availableMoves.Add($"{(row).ToString()},{col - 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (northEast)
+            {
+                if (Check(gameBoard, row - 1, col + 1))
+                {
+                    availableMoves.Add($"{(row - 1).ToString()},{col + 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (northWest)
+            {
+                if (Check(gameBoard, row - 1, col - 1))
+                {
+                    availableMoves.Add($"{(row - 1).ToString()},{col - 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (southEast)
+            {
+                if (Check(gameBoard, row + 1, col + 1))
+                {
+                    availableMoves.Add($"{(row + 1).ToString()},{col + 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (southWest)
+            {
+                if (Check(gameBoard, row + 1, col - 1))
+                {
+                    availableMoves.Add($"{(row + 1).ToString()},{col - 1}");
+                }
+                else
+                {
+
+                }
+
+            }
+            if (availableMoves.Count>0)
+            {
+                isInCheckMate = false;
+                isInCheck = false;
+            }
+            else
+            {
+                isInCheckMate = true;
+            }
+            return isInCheckMate;
+        }
+
         internal bool detectCheck(Piece[][] gameBoard)
         {
             bool north;
@@ -622,7 +743,7 @@ namespace Chess.MVC.Model
                         {
                             index++;
                             if (row - index < 0)
-                            {                    
+                            {
                                 checkExit = true;
                             }
                         }
@@ -637,7 +758,7 @@ namespace Chess.MVC.Model
                                  (gameBoard[row - index][col].GetType().Name == "Rook" && gameBoard[row - index][col].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row - index][col]);
-                                isInCheck =  checkDanger(checkPieces, blockingPieces);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row - index][col].GetType().Name == "King" && gameBoard[row - index][col].color != this.color) && index < 2)
                             {
@@ -674,7 +795,7 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            if ((gameBoard[row - index][col + index].GetType().Name == "Rook" || gameBoard[row - index][col + index].GetType().Name == "Knight")|| gameBoard[row - index][col + index].color == color)
+                            if ((gameBoard[row - index][col + index].GetType().Name == "Rook" || gameBoard[row - index][col + index].GetType().Name == "Knight") || gameBoard[row - index][col + index].color == color)
                             {
                                 blockingPieces.Add(gameBoard[row - index][col + index]);
                             }

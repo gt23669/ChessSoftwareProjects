@@ -26,7 +26,7 @@ namespace Chess.MVC.Controller
                         GameSetup.SetupGame(args);
                         break;
                     case 2:
-                        PlayGame.playGame(args);
+                        PlayGame.playGame();
                         break;
                     case 3:
                         GameSetup.moveTest(args);

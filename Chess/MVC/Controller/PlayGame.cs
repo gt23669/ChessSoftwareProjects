@@ -17,76 +17,50 @@ namespace Chess.MVC.Controller
         static string[] playerMovments;
         static Piece[][] gameBoard = GameSetup.getGameBoard();
 
-        public static void playGame(string[] allArgs)
+        public static void playGame()
         {
-            List<string> args = new List<string>();
 
-            for (int i = 0; i < allArgs.Length; i++)
-            {
-                if (allArgs[i].Contains("Player"))
-                {
-                    args.Add(allArgs[i]);
-                }
-            }
-
-            int choiceFile;
-            string file;
-
-            Console.WriteLine($"Player1, which file will you use?");
-            choiceFile = CIO.PromptForMenuSelection(args, false);
-            file = args[choiceFile - 1];
-            string[] temp = readPlayerMoves(file);
-            player1.moves = temp.ToList();
-            Console.WriteLine($"Player2, which file will you use?");
-            choiceFile = CIO.PromptForMenuSelection(args, false);
-            file = args[choiceFile - 1];
-            temp = readPlayerMoves(file);
-            player2.moves = temp.ToList();
-
-
-            int index = 0;
             bool exit = false;
             do
             {
-                if (player1.isInCheckMate)
+                if (player1.isInCheck)
                 {
-                    Console.WriteLine("Sorry player1, you have lost!");
-                    exit = true;
-                }
-                else if (player2.isInCheckMate)
-                {
-                    Console.WriteLine("Sorry player2, you have lost!");
-                    exit = true;
-                }
-                else
-                {
-                    if (player1.isInCheck)
+                    if (player1.isInCheckMate)
                     {
-                        Console.WriteLine("Player1, protect your king! You are in check!");
-                    }
-                    else if (player2.isInCheck)
-                    {
-                        Console.WriteLine("Player2, protect your king! You are in check!");
+                        Console.WriteLine("Player1, you have lost. You are in CheckMate");
+                        exit = true;
+                        break;
                     }
                     else
                     {
-                        if (player1.isTurn)
-                        {
-                            Console.WriteLine("Player1, it is your turn!");
-                            index = player1.moveIndex;
-                            playerMovments = player1.moves.ToArray();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Player2, it is your turn!");
-                            index = player2.moveIndex;
-                            playerMovments = player2.moves.ToArray();
-                        }
-
+                        Console.WriteLine("Player1, you are in Check");
                     }
+                }
+                else if (player2.isInCheck)
+                {
+                    if (player2.isInCheckMate)
+                    {
+                        Console.WriteLine("Player2, you have lost. You are in CheckMate");
+                        exit = true;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Player2, you are in Check");
+                    }
+                }
 
-                    movePiece(index);
 
+                if (player1.isTurn)
+                {
+                    GameSetup.printBoard(gameBoard);
+                    Console.WriteLine("");
+
+                    Console.WriteLine();
+                }
+                else
+                {
+                    GameSetup.printBoard(gameBoard);
                 }
 
 
@@ -96,46 +70,45 @@ namespace Chess.MVC.Controller
 
 
 
-        private static void movePiece(int index)
+        private static void movePiece()
         {
-            bool exit = false;
-            do
-            {
-                GameSetup.printBoard(gameBoard);
-                Console.WriteLine();
-                int currentCol = GameSetup.convertX(playerMovments[index][0]);
-                int.TryParse(playerMovments[index][1].ToString(), out int currentRow);
-                int nextCol = GameSetup.convertX(playerMovments[index][2]);
-                int.TryParse(playerMovments[index][3].ToString(), out int NextRow);
+            //bool exit = false;
+            //do
+            //{
+            //    //GameSetup.printBoard(gameBoard);
+            //    //Console.WriteLine();
+            //    int currentCol = GameSetup.convertX(playerMovments[index][0]);
+            //    int.TryParse(playerMovments[index][1].ToString(), out int currentRow);
+            //    int nextCol = GameSetup.convertX(playerMovments[index][2]);
+            //    int.TryParse(playerMovments[index][3].ToString(), out int NextRow);
 
-                if (gameBoard[currentRow][currentCol] != null)
-                {
-                    Console.WriteLine($"Attempting to move {(player1.isTurn ? player1.name : player2.name)}'s {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} to col:{nextCol} row:{NextRow} ");
-                    if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
-                    {
-                        Console.WriteLine($"{(player1.isTurn ? player1.name : player2.name)}'s {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} moved to col:{nextCol} row:{NextRow} ");
-                        gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
-                        gameBoard[currentRow][currentCol] = null;
-                        gameBoard[NextRow][nextCol].row = NextRow;
-                        gameBoard[NextRow][nextCol].col = nextCol;
-                        turnFlip(index);
-                        exit = true;
+            //    if (gameBoard[currentRow][currentCol] != null)
+            //    {
+            //        Console.WriteLine($"Attempting to move {(player1.isTurn ? player1.name : player2.name)}'s {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} to col:{nextCol} row:{NextRow} ");
+            //        if (gameBoard[currentRow][currentCol].Check(gameBoard, NextRow, nextCol))
+            //        {
+            //            Console.WriteLine($"{(player1.isTurn ? player1.name : player2.name)}'s {gameBoard[currentRow][currentCol].name} from col:{currentCol} row:{currentRow} moved to col:{nextCol} row:{NextRow} ");
+            //            gameBoard[NextRow][nextCol] = gameBoard[currentRow][currentCol];
+            //            gameBoard[currentRow][currentCol] = null;
+            //            gameBoard[NextRow][nextCol].row = NextRow;
+            //            gameBoard[NextRow][nextCol].col = nextCol;
+            //            exit = true;
 
-                    }
+            //        }
 
-                }
-                else
-                {
-                    Console.WriteLine("There is no piece to move");
-                    index++;
-                }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("There is no piece to move");
+            //        index++;
+            //    }
 
-            } while (!exit);
+            //} while (!exit);
 
 
-            Console.WriteLine();
-            GameSetup.printBoard(gameBoard);
-            Console.WriteLine();
+            //Console.WriteLine();
+            //GameSetup.printBoard(gameBoard);
+            //Console.WriteLine();
         }
 
         public static void turnFlip(int i)

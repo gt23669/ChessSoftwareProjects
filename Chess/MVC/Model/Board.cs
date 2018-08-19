@@ -47,20 +47,25 @@ namespace Chess.MVC.Model
                     {
                         if (j == 7)
                         {
-                            Console.Write("|___|");
+                            Console.Write($"|___| {i+1}");
                             Console.WriteLine();
                         }
                         else
                         {
-                            Console.Write("|___");
+                            Console.Write($"|___");
                         }
                     }
                     else
                     {
                         if (j == 7)
                         {
-                            Console.Write($"|_{gameBoard[i][j].ToString()}_|");
+                            Console.Write($"|_{gameBoard[i][j].ToString()}_| {i+1}");
                             Console.WriteLine();
+                            if (i == 7)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("  A   B   C   D   E   F   G   H  ");
+                            }
                         }
                         else
                         {
