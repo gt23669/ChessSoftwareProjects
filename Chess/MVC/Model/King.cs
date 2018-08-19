@@ -441,6 +441,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -461,6 +462,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -486,6 +488,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -505,6 +508,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -529,6 +533,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -549,6 +554,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
 
@@ -570,6 +576,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
 
@@ -586,6 +593,7 @@ namespace Chess.MVC.Model
                             {
                                 Console.WriteLine($"{color} {name} is in check by {gameBoard[row - 2][col + 1].color} {gameBoard[row - 2][col + 1].name}");
                                 isInCheck = true;
+                                return isInCheck;
                             }
                         }
                         else
@@ -614,19 +622,7 @@ namespace Chess.MVC.Model
                         {
                             index++;
                             if (row - index < 0)
-                            {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
+                            {                    
                                 checkExit = true;
                             }
                         }
@@ -641,27 +637,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row - index][col].GetType().Name == "Rook" && gameBoard[row - index][col].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row - index][col]);
+                                isInCheck =  checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row - index][col].GetType().Name == "King" && gameBoard[row - index][col].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row - index][col]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (row - index < 0)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -683,18 +669,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (row - index < 0 || col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -710,27 +684,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row - index][col + index].GetType().Name == "Bishop" && gameBoard[row - index][col + index].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row - index][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row - index][col + index].GetType().Name == "King" && gameBoard[row - index][col + index].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row - index][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (row - index < 0 || col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -753,18 +717,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (row - index < 0 || col - index < 0)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -780,27 +732,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row - index][col - index].GetType().Name == "Bishop" && gameBoard[row - index][col - index].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row - index][col - index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row - index][col - index].GetType().Name == "King" && gameBoard[row - index][col - index].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row - index][col - index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (row - index < 0 || col - index < 0)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -822,18 +764,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -848,27 +778,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row][col + index].GetType().Name == "Rook" && gameBoard[row][col + index].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row][col + index].GetType().Name == "King" && gameBoard[row][col + index].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -890,18 +810,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -916,28 +824,18 @@ namespace Chess.MVC.Model
                                  (gameBoard[row + index][col].GetType().Name == "Rook" && gameBoard[row + index][col].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row + index][col]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row + index][col].GetType().Name == "King" && gameBoard[row + index][col].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row + index][col]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
 
                             index++;
                             if (row + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -959,18 +857,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7 || col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -986,27 +872,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row + index][col + index].GetType().Name == "Bishop" && gameBoard[row + index][col + index].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row + index][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row + index][col + index].GetType().Name == "King" && gameBoard[row + index][col + index].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row + index][col + index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (row + index > 7 || col + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -1028,18 +904,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (row + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -1055,27 +919,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row + index][col].GetType().Name == "Bishop" && gameBoard[row + index][col].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row + index][col]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row + index][col].GetType().Name == "King" && gameBoard[row + index][col].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row + index][col]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (row + index > 7)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -1097,18 +951,6 @@ namespace Chess.MVC.Model
                             index++;
                             if (col - index < 0)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -1123,27 +965,17 @@ namespace Chess.MVC.Model
                                  (gameBoard[row][col - index].GetType().Name == "Rook" && gameBoard[row][col - index].color != this.color))
                             {
                                 checkPieces.Add(gameBoard[row][col - index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
                             else if ((gameBoard[row][col - index].GetType().Name == "King" && gameBoard[row][col - index].color != this.color) && index < 2)
                             {
                                 checkPieces.Add(gameBoard[row][col - index]);
+                                isInCheck = checkDanger(checkPieces, blockingPieces);
                             }
 
                             index++;
                             if (col - index < 0)
                             {
-                                if (checkPieces.Count > 0)
-                                {
-                                    if (blockingPieces.Count > 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        isInCheck = true;
-
-                                    }
-                                }
                                 checkExit = true;
                             }
                         }
@@ -1155,6 +987,19 @@ namespace Chess.MVC.Model
             }
 
             return isInCheck;
+        }
+
+        private bool checkDanger(List<Piece> checkPieces, List<Piece> blockingPieces)
+        {
+
+            if (blockingPieces.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
