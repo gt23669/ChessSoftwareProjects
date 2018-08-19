@@ -20,6 +20,7 @@ namespace Chess.MVC.Model
             base.color = color;
             base.col = col;
             base.row = row;
+            base.availableMoves = new List<int>();
         }
 
 

@@ -19,6 +19,7 @@ namespace Chess.MVC.Model
             base.color = color;
             base.col = col;
             base.row = row;
+            base.availableMoves = new List<int>();
         }
 
         public override string ToString()
@@ -29,7 +30,7 @@ namespace Chess.MVC.Model
         public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
         {
             bool valid = false;
-            if (nextRow > 7 || nextCol > 7)
+            if (nextRow > 7 || nextCol > 7 || nextRow < 0 || nextCol < 0)
             {
                 Console.WriteLine("Move is outside of the bounds of the board");
                 return false;

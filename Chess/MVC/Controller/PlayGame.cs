@@ -261,7 +261,6 @@ namespace Chess.MVC.Controller
                         }
                         break;
                     case "Bishop":
-
                         break;
                     case "King":
                         break;
