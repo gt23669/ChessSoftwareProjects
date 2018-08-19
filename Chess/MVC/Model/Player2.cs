@@ -18,6 +18,7 @@ namespace Chess.MVC.Model
             moveIndex = 0;
             piecesTaken = new List<Piece>();
             moves = new List<string>();
+            moveablePieces = new List<Piece>();
         }
 
         public override StringBuilder ToString()

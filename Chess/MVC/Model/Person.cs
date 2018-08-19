@@ -16,6 +16,7 @@ namespace Chess.MVC.Model
         public List<Piece> piecesTaken;
         public int moveIndex;
         public List<string> moves;
+        public List<Piece> moveablePieces;
 
 
         public abstract StringBuilder ToString();

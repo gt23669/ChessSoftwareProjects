@@ -20,6 +20,9 @@ namespace Chess.MVC.Controller
         public static void playGame()
         {
 
+            List<Piece> playerPieces = GameSetup.getAllPieces();
+            sortPlayerPieceList(playerPieces);
+
             bool exit = false;
             do
             {
@@ -50,25 +53,263 @@ namespace Chess.MVC.Controller
                     }
                 }
 
+                playTurn(player1.isTurn ? true : false);
 
-                if (player1.isTurn)
-                {
-                    GameSetup.printBoard(gameBoard);
-                    Console.WriteLine("");
 
-                    Console.WriteLine();
-                }
-                else
-                {
-                    GameSetup.printBoard(gameBoard);
-                }
 
 
 
             } while (!exit);
         }
 
+        private static void playTurn(bool player)
+        {
+            Person tempPlayer = player ? player1 : player2;
 
+            GameSetup.printBoard(gameBoard);
+            Console.WriteLine();
+            Console.WriteLine($"{tempPlayer.name}, it is your turn. Select your token to move...");
+            string[] temp = new string[tempPlayer.moveablePieces.Count];
+            for (int i = 0; i < tempPlayer.moveablePieces.Count; i++)
+            {
+                //Console.WriteLine($"{player1.moveablePieces[i].name} col: {player1.moveablePieces[i].col} row: {player1.moveablePieces[i].row}");
+                temp[i] = $"{tempPlayer.moveablePieces[i].name} col: {convertCol(tempPlayer.moveablePieces[i].col + 65)} row: {tempPlayer.moveablePieces[i].row + 1}";
+            }
+            int pieceChoice = CIO.PromptForMenuSelection(temp, false);
+
+            int col = tempPlayer.moveablePieces[pieceChoice - 1].col;
+            int row = tempPlayer.moveablePieces[pieceChoice - 1].row;
+            FindAvailableMoves(tempPlayer.moveablePieces[pieceChoice], row, col);
+            List<Move> tempMoves = new List<Move>();
+            for (int i = 0; i < gameBoard[row][col].availableMoves.Count; i = i + 2)
+            {
+                tempMoves.Add(new Move(gameBoard[row][col].availableMoves[i], gameBoard[row][col].availableMoves[i + 1]));
+            }
+            temp = new string[tempMoves.Count];
+            for (int i = 0; i < tempMoves.Count; i++)
+            {
+                temp[i] = $"Col: {convertCol(tempMoves[i].col + 65)} Row: {tempMoves[i].row + 1}";
+            }
+            Console.WriteLine("Select a move to make...");
+            int moveChoice = CIO.PromptForMenuSelection(temp, false);
+
+            gameBoard[tempMoves[moveChoice - 1].row][tempMoves[moveChoice - 1].col] = gameBoard[row][col];
+            gameBoard[row][col] = null;
+            GameSetup.printBoard(gameBoard);
+            turnFlip();
+        }
+
+        private static void FindAvailableMoves(Piece piece, int row, int col)
+        {
+            int nRow;
+            int nCol;
+            for (int i = 1; i < gameBoard.Length; i++)
+            {
+                switch (piece.GetType().Name)
+                {
+                    case "Pawn":
+                        if (piece.color == 'L')
+                        {
+                            nRow = row - i;
+                            nCol = col;
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+
+                            nCol = col + i;//northeast
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+
+                            nCol = col - i;//northwest
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+
+                        }
+                        else
+                        {
+                            nRow = row + i;
+                            nCol = col;
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+                            nCol = col + i;//southeast
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+
+                            nCol = col - i;//southwest
+                            if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                            {
+                                gameBoard[row][col].availableMoves.Add(nRow);
+                                gameBoard[row][col].availableMoves.Add(nCol);
+                            }
+
+                        }
+
+
+                        break;
+                    case "Rook":
+                        //north
+                        nRow = row - i;
+                        nCol = col;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //south
+                        nRow = row + i;
+                        nCol = col;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //east
+                        nRow = row;
+                        nCol = col + i;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //west
+                        nRow = row;
+                        nCol = col - i;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        break;
+                    case "Knight":
+                        //northEastRow
+                        nRow = row - 2;
+                        nCol = col + 1;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //northEastCol
+                        nRow = row - 1;
+                        nCol = col + 2;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //northWestRow
+                        nRow = row - 2;
+                        nCol = col - 1;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //northWestCol
+                        nRow = row - 1;
+                        nCol = col - 2;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //southEastRow
+                        nRow = row + 2;
+                        nCol = col + 1;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //southEastCol
+                        nRow = row + 1;
+                        nCol = col + 2;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //southWestRow
+                        nRow = row + 2;
+                        nCol = col - 1;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        //southWestCol
+                        nRow = row + 1;
+                        nCol = col - 2;
+                        if (gameBoard[row][col].Check(gameBoard, nRow, nCol))
+                        {
+                            gameBoard[row][col].availableMoves.Add(nRow);
+                            gameBoard[row][col].availableMoves.Add(nCol);
+                        }
+                        break;
+                    case "Bishop":
+
+                        break;
+                    case "King":
+                        break;
+                    case "Queen":
+                        break;
+                }
+            }
+
+        }
+
+        private static object convertCol(int col)
+        {
+            switch (col)
+            {
+                case 65:
+                    return 'A';
+                case 66:
+                    return 'B';
+                case 67:
+                    return 'C';
+                case 68:
+                    return 'D';
+                case 69:
+                    return 'E';
+                case 70:
+                    return 'F';
+                case 71:
+                    return 'G';
+                case 72:
+                    return 'H';
+            }
+            return col;
+        }
+
+        private static void sortPlayerPieceList(List<Piece> playerPieces)
+        {
+            for (int i = 0; i < playerPieces.Count; i++)
+            {
+                if (playerPieces[i].color == 'L')
+                {
+                    player1.moveablePieces.Add(playerPieces[i]);
+                }
+                else
+                {
+                    player2.moveablePieces.Add(playerPieces[i]);
+                }
+            }
+        }
 
         private static void movePiece()
         {
@@ -111,7 +352,7 @@ namespace Chess.MVC.Controller
             //Console.WriteLine();
         }
 
-        public static void turnFlip(int i)
+        public static void turnFlip(int i = 0)
         {
             if (player1.isTurn)
             {

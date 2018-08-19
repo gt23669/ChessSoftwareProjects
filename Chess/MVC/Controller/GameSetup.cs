@@ -14,7 +14,7 @@ namespace Chess.MVC.Controller
     {
         static Board board = new Board();
         static Piece[][] gameBoard = new Piece[8][];
-        static List<Piece> pieces;
+        static List<Piece> allPieces;
         static King LKing;
         static King DKing;
 
@@ -24,13 +24,13 @@ namespace Chess.MVC.Controller
         {
             gameBoard = board.GenerateBoard();
             setupBoard(args);
-            board.FillBoard(pieces, gameBoard);
+            board.FillBoard(allPieces, gameBoard);
             board.printNewBoard(gameBoard);
         }
 
         private static void setupBoard(string[] allArgs)
         {
-            pieces = new List<Piece>();
+            allPieces = new List<Piece>();
             List<string> args = new List<string>();
             for (int i = 0; i < allArgs.Length; i++)
             {
@@ -53,16 +53,16 @@ namespace Chess.MVC.Controller
 
             for (int i = 0; i < SplitArray.Length; i++)
             {
-                pieces.Add(CreatePiece(SplitArray[i]));
-                if (pieces[i].GetType().Name == "King")
+                allPieces.Add(CreatePiece(SplitArray[i]));
+                if (allPieces[i].GetType().Name == "King")
                 {
-                    if (pieces[i].color == 'L')
+                    if (allPieces[i].color == 'L')
                     {
-                        LKing = (King)pieces[i];
+                        LKing = (King)allPieces[i];
                     }
                     else
                     {
-                        DKing = (King)pieces[i];
+                        DKing = (King)allPieces[i];
                     }
                 }
             }
@@ -108,7 +108,7 @@ namespace Chess.MVC.Controller
                             }
 
                         }
-                        else if(DKing.detectCheck(gameBoard))
+                        else if (DKing.detectCheck(gameBoard))
                         {
                             Console.WriteLine("Black King in Check");
                             if (DKing.detectCheckMate(gameBoard))
@@ -117,7 +117,7 @@ namespace Chess.MVC.Controller
                                 break;
                             }
                         }
-                        
+
                         //Console.WriteLine($"Light King in check: {LKing.detectCheck(gameBoard)}" + $"\nDark King in check: {DKing.detectCheck(gameBoard)}");
                     }
 
@@ -225,6 +225,11 @@ namespace Chess.MVC.Controller
                         if (color == 'D')
                         {
                             Pawn.ID = Pawn.ID.ToLower();
+
+                        }
+                        else
+                        {
+
                         }
                         return Pawn;
                     case 'R':
@@ -233,12 +238,20 @@ namespace Chess.MVC.Controller
                         {
                             Rook.ID = Rook.ID.ToLower();
                         }
+                        else
+                        {
+
+                        }
                         return Rook;
                     case 'N':
                         Piece Knight = new Knight(color, col, row);
                         if (color == 'D')
                         {
                             Knight.ID = Knight.ID.ToLower();
+                        }
+                        else
+                        {
+
                         }
                         return Knight;
                     case 'B':
@@ -247,6 +260,10 @@ namespace Chess.MVC.Controller
                         {
                             Bishop.ID = Bishop.ID.ToLower();
                         }
+                        else
+                        {
+
+                        }
                         return Bishop;
                     case 'K':
                         Piece King = new King(color, col, row);
@@ -254,12 +271,20 @@ namespace Chess.MVC.Controller
                         {
                             King.ID = King.ID.ToLower();
                         }
+                        else
+                        {
+
+                        }
                         return King;
                     case 'Q':
                         Piece Queen = new Queen(color, col, row);
                         if (color == 'D')
                         {
                             Queen.ID = Queen.ID.ToLower();
+                        }
+                        else
+                        {
+
                         }
                         return Queen;
 
@@ -316,6 +341,10 @@ namespace Chess.MVC.Controller
         public static void printBoard(Piece[][] gameBoard)
         {
             board.printNewBoard(gameBoard);
+        }
+        public static List<Piece> getAllPieces()
+        {
+            return allPieces;
         }
 
     }

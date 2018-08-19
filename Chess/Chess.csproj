@@ -52,6 +52,7 @@
     <Compile Include="MVC\Model\Board.cs" />
     <Compile Include="MVC\Model\King.cs" />
     <Compile Include="MVC\Model\Knight.cs" />
+    <Compile Include="MVC\Model\Move.cs" />
     <Compile Include="MVC\Model\Pawn.cs" />
     <Compile Include="MVC\Model\Person.cs" />
     <Compile Include="MVC\Model\Piece.cs" />
