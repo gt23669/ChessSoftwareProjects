@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Chess.MVC.Model
 {
@@ -13,10 +9,11 @@ namespace Chess.MVC.Model
         public char color;
         public int col;
         public int row;
-        public List<int> availableMoves;
-        public abstract bool Check(Piece[][] gameBoard, int nextRow, int nextCol);
+        public List<Move> moves;
 
-        override
+
+
+        public abstract bool CheckValidMove(Piece[][] gameBoard, List<Piece> gameTokens, int nextRow, int nextCol, bool message);
         public abstract string ToString();
 
     }

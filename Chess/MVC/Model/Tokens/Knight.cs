@@ -1,53 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chess.MVC.Model
+namespace Chess.MVC.Model.Tokens
 {
     class Knight : Piece
     {
-
-        //char color;
-        //int xLoc;
-        //int row;
-
         public Knight(char color, int col, int row)
         {
-            base.name = "Knight";
-            base.ID = "N";
+            name = "Knight";
+            ID = "N";
             base.color = color;
             base.col = col;
             base.row = row;
-            base.availableMoves = new List<int>();
+            moves = new List<Move>();
         }
-
-
-
-
-
         public override string ToString()
         {
             return ID;
         }
-
-        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
+        public override bool CheckValidMove(Piece[][] gameBoard, List<Piece> gameTokens, int nextRow, int nextCol, bool message)
         {
             bool valid = false;
-            if (nextRow > 7 || nextCol > 7)
+            if (nextRow > 7 || nextCol > 7 || nextRow < 0 || nextCol < 0)
             {
-                Console.WriteLine("Move is outside of the bounds of the board");
+                if (message)
+                {
+                    Console.WriteLine("Move is outside of the bounds of the board");
+
+                }
                 return false;
             }
             if (gameBoard[row][col] == gameBoard[nextRow][nextCol])
             {
-                Console.WriteLine("You didnt move anywhere");
+                if (message)
+                {
+                    Console.WriteLine("You didnt move anywhere");
+
+                }
                 return false;
             }
             if (gameBoard[row][col] == null)
             {
-                Console.WriteLine($"There is no piece to move");
+                if (message)
+                {
+                    Console.WriteLine($"There is no piece to move");
+
+                }
                 return false;
             }
             bool northEastRow = row - 2 == nextRow && col + 1 == nextCol;
@@ -65,7 +63,11 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[nextRow][nextCol].color == this.color)
                     {
-                        Console.WriteLine("You can not move there, same color piece occupies the space");
+                        if (message)
+                        {
+
+                            Console.WriteLine("You can not move there, same color piece occupies the space");
+                        }
                         valid = false;
                     }
                     else
@@ -85,7 +87,11 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[nextRow][nextCol].color == this.color)
                     {
-                        Console.WriteLine("You can not move there, same color piece occupies the space");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move there, same color piece occupies the space");
+
+                        }
                         valid = false;
                     }
                     else
@@ -105,7 +111,11 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[nextRow][nextCol].color == this.color)
                     {
-                        Console.WriteLine("You can not move there, same color piece occupies the space");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move there, same color piece occupies the space");
+
+                        }
                         valid = false;
                     }
                     else
@@ -125,7 +135,11 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[nextRow][nextCol].color == this.color)
                     {
-                        Console.WriteLine("You can not move there, same color piece occupies the space");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move there, same color piece occupies the space");
+
+                        }
                         valid = false;
                     }
                     else
@@ -141,11 +155,17 @@ namespace Chess.MVC.Model
             }
             else
             {
-                Console.WriteLine("This is not a legal move");
+                if (message)
+                {
+                    Console.WriteLine("This is not a legal move");
+
+                }
                 valid = false;
             }
 
             return valid;
         }
+
+
     }
 }

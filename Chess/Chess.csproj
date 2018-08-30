@@ -45,21 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVC\Controller\Board.cs" />
     <Compile Include="MVC\Controller\Game.cs" />
-    <Compile Include="MVC\Controller\GameSetup.cs" />
-    <Compile Include="MVC\Controller\PlayGame.cs" />
-    <Compile Include="MVC\Model\Bishop.cs" />
-    <Compile Include="MVC\Model\Board.cs" />
-    <Compile Include="MVC\Model\King.cs" />
-    <Compile Include="MVC\Model\Knight.cs" />
+    <Compile Include="MVC\Controller\PreGameSetup.cs" />
     <Compile Include="MVC\Model\Move.cs" />
-    <Compile Include="MVC\Model\Pawn.cs" />
     <Compile Include="MVC\Model\Person.cs" />
     <Compile Include="MVC\Model\Piece.cs" />
-    <Compile Include="MVC\Model\Player1.cs" />
-    <Compile Include="MVC\Model\Player2.cs" />
-    <Compile Include="MVC\Model\Queen.cs" />
-    <Compile Include="MVC\Model\Rook.cs" />
+    <Compile Include="MVC\Model\Player\Player1.cs" />
+    <Compile Include="MVC\Model\Player\Player2.cs" />
+    <Compile Include="MVC\Model\Tokens\Bishop.cs" />
+    <Compile Include="MVC\Model\Tokens\King.cs" />
+    <Compile Include="MVC\Model\Tokens\Knight.cs" />
+    <Compile Include="MVC\Model\Tokens\Pawn.cs" />
+    <Compile Include="MVC\Model\Tokens\Queen.cs" />
+    <Compile Include="MVC\Model\Tokens\Rook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

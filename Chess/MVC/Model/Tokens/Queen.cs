@@ -1,49 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chess.MVC.Model
+namespace Chess.MVC.Model.Tokens
 {
     class Queen : Piece
     {
-        //char color;
-        //int xLoc;
-        //int yLoc;
-
         public Queen(char color, int col, int row)
         {
-            base.name = "Queen";
-            base.ID = "Q";
+            name = "Queen";
+            ID = "Q";
             base.color = color;
             base.col = col;
             base.row = row;
-            base.availableMoves = new List<int>();
+            moves = new List<Move>();
         }
-
-
         public override string ToString()
         {
             return ID;
         }
-
-        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
+        public override bool CheckValidMove(Piece[][] gameBoard, List<Piece> gameTokens, int nextRow, int nextCol, bool message)
         {
             bool valid = false;
-            if (nextRow > 7 || nextCol > 7)
+            if (nextRow > 7 || nextCol > 7 || nextRow < 0 || nextCol < 0)
             {
-                Console.WriteLine("Move is outside of the bounds of the board");
+                if (message)
+                {
+
+                    Console.WriteLine("Move is outside of the bounds of the board");
+                }
                 return false;
             }
             if (gameBoard[row][col] == gameBoard[nextRow][nextCol])
             {
-                Console.WriteLine("You didnt move anywhere");
+                if (message)
+                {
+
+                    Console.WriteLine("You didnt move anywhere");
+                }
                 return false;
             }
             if (gameBoard[row][col] == null)
             {
-                Console.WriteLine($"There is no piece to move");
+                if (message)
+                {
+
+                    Console.WriteLine($"There is no piece to move");
+                }
                 return false;
             }
 
@@ -87,7 +89,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row - i][col].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -99,7 +105,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -128,7 +138,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row + i][col].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -140,7 +154,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -172,7 +190,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row][col + i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -184,7 +206,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -214,7 +240,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row][col - i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -226,7 +256,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -258,7 +292,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row - i][col + i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -270,7 +308,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -299,7 +341,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row + i][col + i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -311,7 +357,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -343,7 +393,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row - i][col - i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -355,7 +409,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -384,7 +442,11 @@ namespace Chess.MVC.Model
                                 {
                                     if (gameBoard[row + i][col - i].color == this.color)
                                     {
-                                        Console.WriteLine("You can not move to a space occupied by the same color");
+                                        if (message)
+                                        {
+
+                                            Console.WriteLine("You can not move to a space occupied by the same color");
+                                        }
                                         valid = false;
                                         exit = true;
                                     }
@@ -396,7 +458,11 @@ namespace Chess.MVC.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("This is not a valid move");
+                                    if (message)
+                                    {
+
+                                        Console.WriteLine("This is not a valid move");
+                                    }
                                     valid = false;
                                     exit = true;
                                 }
@@ -418,7 +484,11 @@ namespace Chess.MVC.Model
                 }
                 else
                 {
-                    Console.WriteLine("This move is not valid");
+                    if (message)
+                    {
+                        Console.WriteLine("This move is not valid");
+
+                    }
                     exit = true;
                     valid = false;
                 }
@@ -427,5 +497,7 @@ namespace Chess.MVC.Model
 
             return valid;
         }
+
+
     }
 }

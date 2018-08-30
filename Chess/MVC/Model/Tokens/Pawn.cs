@@ -1,46 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chess.MVC.Model
+namespace Chess.MVC.Model.Tokens
 {
     class Pawn : Piece
     {
-
-        //char color;
-        //int xLoc;
-        //int yLoc;
-
-        bool firstMove = false;
+        public bool firstMove = false;
         public Pawn(char color, int col, int row)
         {
-            base.name = "Pawn";
-            base.ID = "P";
+            name = "Pawn";
+            ID = "P";
             base.color = color;
             base.col = col;
             base.row = row;
-            base.availableMoves = new List<int>();
+            moves = new List<Move>();
         }
-
-        public override bool Check(Piece[][] gameBoard, int nextRow, int nextCol)
+        public override string ToString()
         {
-            //check to make sure the pawn is not validating on a straight move when a piece is in front
+            return ID;
+        }
+        public override bool CheckValidMove(Piece[][] gameBoard, List<Piece> gameTokens,int nextRow, int nextCol, bool message)
+        {
             bool valid = false;
             if (nextRow > 7 || nextCol > 7 || nextRow < 0 || nextCol < 0)
             {
-                //Console.WriteLine("Move is outside of the bounds of the board");
+                if (message)
+                {
+                    Console.WriteLine("Move is outside of the bounds of the board");
+
+                }
                 return false;
             }
             if (gameBoard[row][col] == gameBoard[nextRow][nextCol])
             {
-                //Console.WriteLine("You didnt move anywhere");
+                if (message)
+                {
+
+                    Console.WriteLine("You didnt move anywhere");
+                }
                 return false;
             }
             if (gameBoard[row][col] == null)
             {
-                //Console.WriteLine($"There is no piece to move");
+                if (message)
+                {
+
+                    Console.WriteLine($"There is no piece to move");
+                }
                 return false;
             }
 
@@ -68,7 +74,11 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            //Console.WriteLine("You can not move past this piece");
+                            if (message)
+                            {
+                                Console.WriteLine("You can not move past this piece");
+
+                            }
                             valid = false;
                         }
                     }
@@ -82,7 +92,11 @@ namespace Chess.MVC.Model
                     }
                     else
                     {
-                        //Console.WriteLine("You can not move past this piece");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move past this piece");
+
+                        }
                         valid = false;
                     }
                 }
@@ -90,8 +104,12 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row - 1][col - 1] == null)
                     {
+                        if (message)
+                        {
+
+                            Console.WriteLine("There is no piece to take");
+                        }
                         valid = false;
-                        //Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
@@ -102,7 +120,11 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            //Console.WriteLine("You can not take the same color piece");
+                            if (message)
+                            {
+
+                                Console.WriteLine("You can not take the same color piece");
+                            }
                             valid = false;
                         }
 
@@ -112,8 +134,12 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row - 1][col + 1] == null)
                     {
+                        if (message)
+                        {
+
+                            Console.WriteLine("There is no piece to take");
+                        }
                         valid = false;
-                        //Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
@@ -124,7 +150,11 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            //Console.WriteLine("You can not take the same color piece");
+                            if (message)
+                            {
+                                Console.WriteLine("You can not take the same color piece");
+
+                            }
                             valid = false;
                         }
 
@@ -132,14 +162,18 @@ namespace Chess.MVC.Model
                 }
                 else
                 {
-                    //Console.WriteLine("This move is not valid");
+                    if (message)
+                    {
+                        Console.WriteLine("This move is not valid");
+
+                    }
                     valid = false;
                 }
 
             }
             else
             {
-                if ((southJump) && firstMove != false)
+                if ((southJump) && firstMove == false)
                 {
 
                     if (gameBoard[row + 1][col] == null && gameBoard[row + 2][col] == null)
@@ -149,7 +183,11 @@ namespace Chess.MVC.Model
                     }
                     else
                     {
-                        //Console.WriteLine("You can not move past this piece");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move past this piece");
+
+                        }
                         valid = false;
                     }
 
@@ -163,7 +201,11 @@ namespace Chess.MVC.Model
                     }
                     else
                     {
-                        //Console.WriteLine("You can not move past this piece");
+                        if (message)
+                        {
+                            Console.WriteLine("You can not move past this piece");
+
+                        }
                         valid = false;
                     }
                 }
@@ -171,8 +213,12 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row + 1][col + 1] == null)
                     {
+                        if (message)
+                        {
+
+                            Console.WriteLine("There is no piece to take");
+                        }
                         valid = false;
-                        //Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
@@ -183,7 +229,11 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            //Console.WriteLine("You can not take the same color piece");
+                            if (message)
+                            {
+
+                                Console.WriteLine("You can not take the same color piece");
+                            }
                             valid = false;
                         }
 
@@ -193,8 +243,12 @@ namespace Chess.MVC.Model
                 {
                     if (gameBoard[row + 1][col - 1] == null)
                     {
+                        if (message)
+                        {
+
+                            Console.WriteLine("There is no piece to take");
+                        }
                         valid = false;
-                        //Console.WriteLine("There is no piece to take");
                     }
                     else
                     {
@@ -205,7 +259,11 @@ namespace Chess.MVC.Model
                         }
                         else
                         {
-                            //Console.WriteLine("You can not take the same color piece");
+                            if (message)
+                            {
+
+                                Console.WriteLine("You can not take the same color piece");
+                            }
                             valid = false;
                         }
 
@@ -213,7 +271,11 @@ namespace Chess.MVC.Model
                 }
                 else
                 {
-                    //Console.WriteLine("This move is not valid");
+                    if (message)
+                    {
+
+                        Console.WriteLine("This move is not valid");
+                    }
                     valid = false;
                 }
             }
@@ -221,9 +283,6 @@ namespace Chess.MVC.Model
             return valid;
         }
 
-        public override string ToString()
-        {
-            return ID;
-        }
+
     }
 }
