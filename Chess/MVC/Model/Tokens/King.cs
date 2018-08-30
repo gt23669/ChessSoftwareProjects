@@ -687,7 +687,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name=="King")
                                 {
                                     continue;
                                 }
@@ -748,7 +748,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -810,7 +810,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -871,7 +871,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -933,7 +933,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -995,7 +995,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -1057,7 +1057,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
@@ -1119,7 +1119,7 @@ namespace Chess.MVC.Model.Tokens
                         {
                             for (int j = 0; j < gameTokens.Count; j++)
                             {
-                                if (gameTokens[j] == this)
+                                if (gameTokens[j] == this || gameTokens[j].GetType().Name == "King")
                                 {
                                     continue;
                                 }
